@@ -31,7 +31,7 @@ source $(echo $DIR".dot/lang/."$lang)
 if ! chfn_exists cohoast; then
 	source .dot/install.sh
 	return;
-fi
+fi 
 
 
 echo "$banner_menu"
@@ -70,18 +70,15 @@ sed '/'"$lineformat"'/ d' hosts.txt > hosts.tmp
 foundcategory=$(sed -n '/'"## $category"'/ =' hosts.tmp)
 lineappend=3
 
-
 if [[ $foundcategory == '' ]] ; then
 	echo -e "$categoryformat" >> hosts.tmp
        lineappend=6
 fi
 
 insertline=$(($foundcategory+$lineappend))
-echo $founcategory"linenumber:: "$insertline
+echo $foundcategory"linenumber:: "$insertline
 sed  "$insertline"'a\
 	'"$lineformat" hosts.tmp > hosts.txt
-
-
 
 
 
@@ -89,6 +86,6 @@ sed  "$insertline"'a\
 #--------------------------------------------
 
 #unset PORT LOCALHOST
-unset $banner_menu
+unset banner_menu
 > hosts.tmp
 rm -f hosts.tmp
