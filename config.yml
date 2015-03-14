@@ -1,0 +1,26 @@
+- HOSTS_FILE: hosts.txt
+- BACK_FILE: backup/hosts.backup.txt
+- LOCALHOST: 127.0.0.1
+- PORT: 80
+- DEFAULTCATEGORY: uncategorized
+- SUPPORTED_LANGUAGES:
+  - en
+  - nl
+- DEFAULT_LANG: en
+
+
+- FILE_LOCATION:
+    HOST: hosts.txt
+    BACKUP: backup/hosts.backup.txt
+- DEFAULT:
+    LOCALHOST: 127.0.0.1
+    PORT: 80
+    CATEGORY: uncategorized    
+- LANG: en
+
+
+
+- BLOCK:
+    HOST: 127.0.0.1
+    PORT: 0404
+    
