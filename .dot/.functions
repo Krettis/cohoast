@@ -69,3 +69,13 @@ function in_array() {
     echo "n"
     return 1
 }
+
+chfn_exists()
+{
+	result="`type -t $1`"
+	if [ "$result" == 'function' ]; then
+		return 0
+	else
+		return 1
+	fi
+}
