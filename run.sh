@@ -7,6 +7,7 @@ SUCCESS=0
 #HOSTS_FILE="/etc/hosts"
 HOSTS_FILE="hosts.txt"
 BACK_FILE="backup/hosts.backup.txt"
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/"
 LOCALHOST="127.0.0.1"
 PORT="80"
 DEFAULTCATEGORY="uncategorized"
