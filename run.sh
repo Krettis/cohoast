@@ -4,10 +4,10 @@ SUCCESS=0
 
 ### CONFIGURATION ###
 #--------------------------------------------
-#HOSTS_FILE="/etc/hosts"
-HOSTS_FILE="hosts.txt"
-BACK_FILE="backup/hosts.backup.txt"
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/"
+#HOSTS_FILE="/etc/hosts"
+HOSTS_FILE=$DIR"hosts.txt"
+BACK_FILE=$DIR"backup/hosts.backup.txt"
 LOCALHOST="127.0.0.1"
 PORT="80"
 DEFAULTCATEGORY="uncategorized"
@@ -17,8 +17,8 @@ DEFAULT_LANG="en"
 
 ### LOAD FILES 
 #--------------------------------------------
-source .dot/.functions
-source .dot/.art
+source $DIR.dot/.functions
+source $DIR.dot/.art
 
 locale_found=$(locale | grep LANG | cut -d= -f2 | cut -d_ -f1 | cut -d\" -f2)
 if [ $(in_array "${SUPPORTED_LANGUAGES[@]}" $locale_found) == "y" ]; then
