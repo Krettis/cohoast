@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# MENU
+menu_title="Please select your action for the use of cohost"
+menu_option_add_host="Add hostname"
+menu_option_quit="Quit"
+
+# PROMPT ADD HOST
+lng_which_category="In which category has this to be put?"
+lng_add_ipaddress="To which ipaddress has it to be referenced?"
+lng_add_port="What is the portnumber?"
+lng_add_virtual_host="What is the name of the virtual host?"
