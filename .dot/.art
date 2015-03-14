@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# font: 
+
+
+banner_menu="$(cat .dot/art/banner_menu.txt)"
+
