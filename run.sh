@@ -26,7 +26,12 @@ if [ $(in_array "${SUPPORTED_LANGUAGES[@]}" $locale_found) == "y" ]; then
 else
     lang=$DEFAULT_LANG
 fi
-source $(echo ".dot/lang/."$lang)
+source $(echo $DIR".dot/lang/."$lang)
+
+if ! chfn_exists cohoast; then
+	source .dot/install.sh
+	return;
+fi
 
 
 echo "$banner_menu"
