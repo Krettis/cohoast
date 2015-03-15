@@ -87,31 +87,10 @@ category=$(giveprompt "${lng_which_category}" $DEFAULT_CATEGORY)
 ipaddress=$(giveprompt "${lng_add_ipaddress}" $LOCALHOST) 
 portnumber=$(giveprompt "${lng_add_port}" $PORT)
 hostname=$(giveprompt "${lng_add_virtual_host}" "")
-echo -e "here are your answers:\n\n\t\t:: CATEGORY - $category\n\n\t\t$ipaddress:$portnumber\t$hostname\n\n"
 
-## backup
-current_time=$(date "+%Y%m%d-%H%M%S")
-backup_comment=$(printf "# This is a backup from %s , made automatically. Only use this when the host file seems to be broken\n" $current_time) 
-echo $backup_comment > $BACK_FILE
-cat hosts.txt >> $BACK_FILE
-
-
-categoryformat="\n\n\n\n\t#####\n\t## $category\n\t#####\n\n\n" 
-lineformat=$(echo -e "$ipaddress:$portnumber\t$hostname\r")
-
-sed '/'"$lineformat"'/ d' hosts.txt > hosts.tmp
-foundcategory=$(sed -n '/'"## $category"'/ =' hosts.tmp)
-lineappend=3
-
-if [[ $foundcategory == '' ]] ; then
-	echo -e "$categoryformat" >> hosts.tmp
-       lineappend=6
-fi
-
-insertline=$(($foundcategory+$lineappend))
-echo $foundcategory"linenumber:: "$insertline
-sed  "$insertline"'a\
-	'"$lineformat" hosts.tmp > hosts.txt
+backup_host_file $BACK_FILE
+source $DIR.dot/addhost.sh
+addHost
 
 
 
