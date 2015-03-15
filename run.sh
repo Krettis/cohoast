@@ -12,9 +12,9 @@ DEFAULT_CATEGORY="uncategorized"
 SUPPORTED_LANGUAGES=( "en" "nl" )
 DEFAULT_LANG="en"
 
-
 ### LOAD FILES 
 #--------------------------------------------
+source $DIR.dot/.config
 source $DIR.dot/.functions
 source $DIR.dot/.art
 
