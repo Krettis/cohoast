@@ -31,18 +31,53 @@ if ! chfn_exists cohoast; then
 	return;
 fi 
 
+ch_options=(add help)
 
-echo "$banner_menu"
-echo -e "Please select your action for the use of cohost\n"
-select menuselect in "$menu_option_add_host" $menu_option_quit; do
-	case $menuselect in
-		"$menu_option_add_host" )
-			echo "ok"
-			break;;
-		$menu_option_quit )
-			return;
-	esac
-done
+### CONTROLLER
+#--------------------------------------------
+if [ $# -eq 0 ]; then
+
+	## MENU
+	echo "$banner_menu"
+	echo -e "Please select your action for the use of cohost\n"
+	select menuselect in "$menu_option_add_host" $menu_option_quit; do
+		case $menuselect in
+			"$menu_option_add_host" )
+				echo "ok"
+				break;;
+			$menu_option_quit )
+				return;
+		esac
+	done
+elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
+	## MANUAL
+
+	if [ $1 == "add" ]; then
+		if [ $# -gt 1 ]; then
+			category=$DEFAULT_CATEGORY
+			ipaddress=$LOCALHOST
+			portnumber=$PORT
+			hostname=$2
+
+			backup_host_file $BACK_FILE
+			source $DIR.dot/addhost.sh
+			addHost
+		else
+			source $DIR.dot/usage.sh
+		fi
+	else
+		source $DIR.dot/usage.sh
+		usage
+	fi
+
+	return
+else
+	## NOTHING FOUND EXIT
+	source $DIR.dot/usage.sh
+	usage
+	return
+fi
+
 
 # MANUAL ADD
 #--------------------------------------------
