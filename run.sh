@@ -1,16 +1,14 @@
 #!/bin/bash
 
-SUCCESS=0
 
 ### CONFIGURATION ###
 #--------------------------------------------
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/"
-#HOSTS_FILE="/etc/hosts"
 HOSTS_FILE=$DIR"hosts.txt"
 BACK_FILE=$DIR"backup/hosts.backup.txt"
 LOCALHOST="127.0.0.1"
 PORT="80"
-DEFAULTCATEGORY="uncategorized"
+DEFAULT_CATEGORY="uncategorized"
 SUPPORTED_LANGUAGES=( "en" "nl" )
 DEFAULT_LANG="en"
 
@@ -50,7 +48,7 @@ done
 #--------------------------------------------
 
 ## get information
-category=$(giveprompt "${lng_which_category}" $DEFAULTCATEGORY)
+category=$(giveprompt "${lng_which_category}" $DEFAULT_CATEGORY)
 ipaddress=$(giveprompt "${lng_add_ipaddress}" $LOCALHOST) 
 portnumber=$(giveprompt "${lng_add_port}" $PORT)
 hostname=$(giveprompt "${lng_add_virtual_host}" "")
@@ -85,7 +83,6 @@ sed  "$insertline"'a\
 # CLEANUP
 #--------------------------------------------
 
-#unset PORT LOCALHOST
-unset banner_menu
+unset PORT LOCALHOST banner_menu
 > hosts.tmp
 rm -f hosts.tmp
