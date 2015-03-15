@@ -37,7 +37,7 @@ ch_options=(add help)
 #--------------------------------------------
 if [ $# -eq 0 ]; then
 
-	## MENU
+	## MENU	
 	echo "$banner_menu"
 	echo -e "Please select your action for the use of cohost\n"
 	select menuselect in "$menu_option_add_host" $menu_option_quit; do
@@ -55,7 +55,7 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 	if [ $1 == "add" ]; then
 		if [ $# -gt 1 ]; then
 			category=$DEFAULT_CATEGORY
-			ipaddress=$LOCALHOST
+			ipaddress=$LOCALHOST	
 			portnumber=$PORT
 			hostname=$2
 
@@ -67,7 +67,7 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 		fi
 	else
 		source $DIR.dot/usage.sh
-		usage
+ 		usage
 	fi
 
 	return
