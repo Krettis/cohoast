@@ -34,6 +34,14 @@ Roadmap of Cohoast
 
 ### templates
 - host templates
+- share templates
+
+### tags
+- for hostnames
+- for blocks
+- 
+
+
 
 
 
