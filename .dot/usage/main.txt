@@ -1,0 +1,12 @@
+usage: cohoast optional: [[add ] [-h | --help] ]
+Only calling 'cohoast' will take you to a friendly menu
+where you can specify a lot more options for handling
+your hostfile.
+
+List of commands: 
+add							Add a hostname to the localhost
+
+-h | --help     Get more information about
+								how to use a command
+
+

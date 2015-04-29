@@ -30,7 +30,7 @@ if ! chfn_exists cohoast; then
 	source .dot/install.sh
 	return;
 fi 
-
+use_manual=0
 ch_options=(add help)
 
 ### CONTROLLER
@@ -44,33 +44,64 @@ if [ $# -eq 0 ]; then
 		case $menuselect in
 			"$menu_option_add_host" )
 				echo "ok"
+				use_manual=1
 				break;;
 			$menu_option_quit )
 				return;
 		esac
 	done
 elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
-	## MANUAL
 
 	if [ $1 == "add" ]; then
 		if [ $# -gt 1 ]; then
 			category=$DEFAULT_CATEGORY
 			ipaddress=$LOCALHOST	
 			portnumber=$PORT
-			hostname=$2
+			hostname=
+
+			args=`getopt abo: $*`
+			for i
+			do
+		 	case "$i"
+		  	in
+					-i|-a|--ip)
+						ipaddress="$3";shift;
+						shift;;	
+					-h|--hostname)
+						hostname="$3";shift;
+						shift;;
+					-c|--category)
+						category="$3";shift;
+						shift;;
+					-p|--port)
+						portnumber="$3";shift;
+						shift;;	
+					--)
+					shift; break;;
+			esac
+			done
+
+			if [ $# -eq 2 ]; then
+				hostname="$2"
+			fi
+
+			if [ -z $hostname ]; then
+				source $DIR.dot/usage.sh
+				usage_add
+				return
+			fi
 
 			backup_host_file $BACK_FILE
 			source $DIR.dot/addhost.sh
 			addHost
 		else
 			source $DIR.dot/usage.sh
+			usage_add
 		fi
 	else
 		source $DIR.dot/usage.sh
  		usage
 	fi
-
-	return
 else
 	## NOTHING FOUND EXIT
 	source $DIR.dot/usage.sh
@@ -81,17 +112,17 @@ fi
 
 # MANUAL ADD
 #--------------------------------------------
-
+if [ $use_manual -eq 1 ]; then
 ## get information
-category=$(giveprompt "${lng_which_category}" $DEFAULT_CATEGORY)
-ipaddress=$(giveprompt "${lng_add_ipaddress}" $LOCALHOST) 
-portnumber=$(giveprompt "${lng_add_port}" $PORT)
-hostname=$(giveprompt "${lng_add_virtual_host}" "")
+	category=$(giveprompt "${lng_which_category}" $DEFAULT_CATEGORY)
+	ipaddress=$(giveprompt "${lng_add_ipaddress}" $LOCALHOST) 
+	portnumber=$(giveprompt "${lng_add_port}" $PORT)
+	hostname=$(giveprompt "${lng_add_virtual_host}" "")
 
-backup_host_file $BACK_FILE
-source $DIR.dot/addhost.sh
-addHost
-
+	backup_host_file $BACK_FILE
+	source $DIR.dot/addhost.sh
+	addHost
+fi
 
 
 # CLEANUP
