@@ -1,0 +1,8 @@
+usage: cohoast add [ hostname |  [ -h | --hostname ] ]
+This will add a hostname to hosts-file
+
+Optional:
+
+  -c|--category       Set the category name
+  -p|--port           Set the portnumber
+  -a|-i|--address     Set the ipaddress	
