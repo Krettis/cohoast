@@ -57,13 +57,46 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 			category=$DEFAULT_CATEGORY
 			ipaddress=$LOCALHOST	
 			portnumber=$PORT
-			hostname=$2
+			hostname=
+
+			args=`getopt abo: $*`
+			for i
+			do
+		 	case "$i"
+		  	in
+					-i|-a|--ip)
+						ipaddress="$3";shift;
+						shift;;	
+					-h|--hostname)
+						hostname="$3";shift;
+						shift;;
+					-c|--category)
+						category="$3";shift;
+						shift;;
+					-p|--port)
+						portnumber="$3";shift;
+						shift;;	
+					--)
+					shift; break;;
+			esac
+			done
+
+			if [ $# -eq 2 ]; then
+				hostname="$2"
+			fi
+
+			if [ -z $hostname ]; then
+				source $DIR.dot/usage.sh
+				usage_add
+				return
+			fi
 
 			backup_host_file $BACK_FILE
 			source $DIR.dot/addhost.sh
 			addHost
 		else
 			source $DIR.dot/usage.sh
+			usage_add
 		fi
 	else
 		source $DIR.dot/usage.sh
@@ -82,7 +115,7 @@ fi
 if [ $use_manual -eq 1 ]; then
 ## get information
 	category=$(giveprompt "${lng_which_category}" $DEFAULT_CATEGORY)
-	ipaddress=$(giveprompt "${lng_add_ipaddress}" $LOCALHOST)
+	ipaddress=$(giveprompt "${lng_add_ipaddress}" $LOCALHOST) 
 	portnumber=$(giveprompt "${lng_add_port}" $PORT)
 	hostname=$(giveprompt "${lng_add_virtual_host}" "")
 
