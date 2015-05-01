@@ -38,6 +38,7 @@ ch_options=(add help)
 if [ $# -eq 0 ]; then
 
 	## MENU	
+	clear
 	echo "$banner_menu"
 	echo -e "Please select your action for the use of cohost\n"
 	select menuselect in "$menu_option_add_host" $menu_option_quit; do
@@ -47,6 +48,7 @@ if [ $# -eq 0 ]; then
 				use_manual=1
 				break;;
 			$menu_option_quit )
+				clear
 				return;
 		esac
 	done
