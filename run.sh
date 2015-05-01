@@ -1,5 +1,7 @@
 #!/bin/bash
 
+VERSION=0.0.6
+RELEASE_NAME="SAND"
 
 ### CONFIGURATION ###
 #--------------------------------------------
