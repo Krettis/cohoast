@@ -122,6 +122,22 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 		show_usage
 	fi
 else
+	args=`getopt abo: $* 2>/dev/null`
+	
+	for i
+	do
+ 	case "$i"
+  	in
+			-v|--version)
+				echo -e "v"$VERSION" - "$RELEASE_NAME
+				return;shift;;
+			-*)
+				shift; break;;
+			--)
+				shift; break;;
+	esac
+	done
+
 	## NOTHING FOUND EXIT
 	show_usage
 	return
