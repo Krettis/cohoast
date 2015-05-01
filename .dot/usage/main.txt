@@ -1,10 +1,11 @@
-usage: cohoast optional: [[add ] [-h | --help] ]
+usage: cohoast optional: [ [add ] [ block ] [-h | --help] ]
 Only calling 'cohoast' will take you to a friendly menu
 where you can specify a lot more options for handling
 your hostfile.
 
 List of commands: 
-add							Add a hostname to the localhost
+add             Add a hostname to the localhost
+block           Add hostname to the blacklist
 
 -h | --help     Get more information about
 								how to use a command

@@ -1,0 +1,3 @@
+usage: cohoast block [ ipaddress ]
+Searches the hostname connecting to the ipaddress and blocking and blocking it
+

@@ -88,8 +88,7 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 			fi
 
 			if [ -z $hostname ]; then
-				source $DIR.dot/usage.sh
-				usage_add
+				show_usage add
 				return
 			fi
 
@@ -97,17 +96,14 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 			source $DIR.dot/addhost.sh
 			addHost
 		else
-			source $DIR.dot/usage.sh
-			usage_add
+			show_usage add
 		fi
 	else
-		source $DIR.dot/usage.sh
- 		usage
+		show_usage
 	fi
 else
 	## NOTHING FOUND EXIT
-	source $DIR.dot/usage.sh
-	usage
+	show_usage
 	return
 fi
 
