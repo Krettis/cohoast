@@ -31,7 +31,7 @@ if ! chfn_exists cohoast; then
 	return;
 fi 
 use_manual=0
-ch_options=(add help)
+ch_options=(add block help)
 
 ### CONTROLLER
 #--------------------------------------------
@@ -98,6 +98,24 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 		else
 			show_usage add
 		fi
+	elif [ $1 == "block" ]; then
+		category=$BLOCK_CATEGORY
+		ipaddress=$BLOCK_IP 
+		portnumber=0
+
+		if [ -z $2 ]; then
+			show_usage block
+			return
+		fi
+
+		hostname=$(dig +short -x $2)
+		if [ -z $hostname ]; then
+			echo $lng_block_nohost
+			return
+		fi
+
+		source $DIR.dot/addhost.sh
+		addHost
 	else
 		show_usage
 	fi
