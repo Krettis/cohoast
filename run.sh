@@ -31,13 +31,14 @@ if ! chfn_exists cohoast; then
 	return;
 fi 
 use_manual=0
-ch_options=(add help)
+ch_options=(add block help)
 
 ### CONTROLLER
 #--------------------------------------------
 if [ $# -eq 0 ]; then
 
 	## MENU	
+	clear
 	echo "$banner_menu"
 	echo -e "Please select your action for the use of cohost\n"
 	select menuselect in "$menu_option_add_host" $menu_option_quit; do
@@ -47,6 +48,7 @@ if [ $# -eq 0 ]; then
 				use_manual=1
 				break;;
 			$menu_option_quit )
+				clear
 				return;
 		esac
 	done
@@ -86,8 +88,7 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 			fi
 
 			if [ -z $hostname ]; then
-				source $DIR.dot/usage.sh
-				usage_add
+				show_usage add
 				return
 			fi
 
@@ -95,17 +96,32 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 			source $DIR.dot/addhost.sh
 			addHost
 		else
-			source $DIR.dot/usage.sh
-			usage_add
+			show_usage add
 		fi
+	elif [ $1 == "block" ]; then
+		category=$BLOCK_CATEGORY
+		ipaddress=$BLOCK_IP 
+		portnumber=0
+
+		if [ -z $2 ]; then
+			show_usage block
+			return
+		fi
+
+		hostname=$(dig +short -x $2)
+		if [ -z $hostname ]; then
+			echo $lng_block_nohost
+			return
+		fi
+
+		source $DIR.dot/addhost.sh
+		addHost
 	else
-		source $DIR.dot/usage.sh
- 		usage
+		show_usage
 	fi
 else
 	## NOTHING FOUND EXIT
-	source $DIR.dot/usage.sh
-	usage
+	show_usage
 	return
 fi
 

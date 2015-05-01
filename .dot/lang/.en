@@ -10,3 +10,6 @@ lng_which_category="In which category has this to be put?"
 lng_add_ipaddress="To which ipaddress has it to be referenced?"
 lng_add_port="What is the portnumber?"
 lng_add_virtual_host="What is the name of the virtual host?"
+
+# MESSAGES
+lng_block_nohost="Could not find hostname to block"

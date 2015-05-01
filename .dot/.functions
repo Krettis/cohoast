@@ -27,6 +27,18 @@ function backup_host_file {
 
 }
 
+function show_usage {
+	source $DIR".dot/usage.sh"
+	fname="usage"
+	if [ ! -z $1 ]; then
+		fname+="_"$1
+	fi
+
+	$fname
+}
+
+
+
 
 function giveprompt {
 
