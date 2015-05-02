@@ -44,13 +44,17 @@ if [ $# -eq 0 ]; then
 	clear
 	echo "$banner_menu"
 	echo -e "Please select your action for the use of cohost\n"
-	select menuselect in "$menu_option_add_host" $menu_option_quit; do
+	select menuselect in "$menu_option_add_host" "$menu_option_backup" "$menu_option_quit"; do
 		case $menuselect in
 			"$menu_option_add_host" )
 				echo "ok"
 				use_manual=1
 				break;;
-			$menu_option_quit )
+			"$menu_option_backup" )
+		    backup_host_file $BACK_FILE
+				echo -e "\n"$lng_backup_success
+				break;;
+			"$menu_option_quit" )
 				clear
 				return;
 		esac
