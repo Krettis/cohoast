@@ -4,6 +4,7 @@
 menu_title="Please select your action for the use of cohost"
 menu_option_add_host="Add hostname"
 menu_option_quit="Quit"
+menu_option_backup="Do a backup"
 
 # PROMPT ADD HOST
 lng_which_category="In which category has this to be put?"
@@ -13,3 +14,4 @@ lng_add_virtual_host="What is the name of the virtual host?"
 
 # MESSAGES
 lng_block_nohost="Could not find hostname to block"
+lng_backup_success="Backup completed!"
