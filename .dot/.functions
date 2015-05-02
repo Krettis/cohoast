@@ -19,11 +19,15 @@ function parse_yaml {
 
 function backup_host_file {
 
+	current_date=$(date "+%Y-%m-%d")
+	current_time=$(date "+%H:%M:%S")
+	bu_time=$(date "+%Y%m%d_%H%M%S")
 	local backup_file=$1
-	current_time=$(date "+%Y%m%d-%H%M%S")
-	backup_comment=$(printf "# This is a backup from %s , made automatically. Only use this when the host file seems to be broken\n" $current_time) 
+	local backup_file_date=${BACK_DIR}"bu_"${bu_time}".bak"
+	backup_comment=$(printf "# This is a backup from %s at %s, made automatically. Only use this when the host file seems to be broken\n" $current_date $current_time) 
 	echo $backup_comment > $backup_file
 	cat $HOSTS_FILE >> $backup_file
+	cat $backup_file >> $backup_file_date
 
 }
 
