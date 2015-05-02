@@ -7,7 +7,8 @@ RELEASE_NAME="SAND"
 #--------------------------------------------
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/"
 HOSTS_FILE=$DIR"hosts.txt"
-BACK_FILE=$DIR"backup/hosts.backup.txt"
+BACK_DIR=$DIR"backup/"
+BACK_FILE=${BACK_DIR}"hosts.backup.txt"
 LOCALHOST="127.0.0.1"
 PORT="80"
 DEFAULT_CATEGORY="uncategorized"
@@ -33,7 +34,7 @@ if ! chfn_exists cohoast; then
 	return;
 fi 
 use_manual=0
-ch_options=(add block help)
+ch_options=(add backup block help)
 
 ### CONTROLLER
 #--------------------------------------------
@@ -100,6 +101,8 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 		else
 			show_usage add
 		fi
+	elif [ $1 == "backup" ]; then
+		backup_host_file $BACK_FILE
 	elif [ $1 == "block" ]; then
 		category=$BLOCK_CATEGORY
 		ipaddress=$BLOCK_IP 
