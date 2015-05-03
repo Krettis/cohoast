@@ -16,14 +16,9 @@ SUPPORTED_LANGUAGES=( "en" "nl" )
 source $DIR.dot/.config
 source $DIR.dot/.functions
 source $DIR.dot/.art
-
-locale_found=$(locale | grep LANG | cut -d= -f2 | cut -d_ -f1 | cut -d\" -f2)
-if [ $(in_array "${SUPPORTED_LANGUAGES[@]}" $locale_found) == "y" ]; then
-    lang=$locale_found 
-else
-    lang=$DEFAULT_LANG
-fi
-source $(echo $DIR".dot/lang/."$lang)
+load_user_config
+load_language
+load_file_locations
 
 if ! chfn_exists cohoast; then
 	source .dot/install.sh
@@ -60,8 +55,8 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 	if [ $1 == "add" ]; then
 		if [ $# -gt 1 ]; then
 			category=$DEFAULT_CATEGORY
-			ipaddress=$LOCALHOST	
-			portnumber=$PORT
+			ipaddress=$DEFAULT_IP
+			portnumber=$DEFAULT_PORT
 			hostname=
 
 			args=`getopt abo: $*`
@@ -152,8 +147,8 @@ fi
 if [ $use_manual -eq 1 ]; then
 ## get information
 	category=$(giveprompt "${lng_which_category}" $DEFAULT_CATEGORY)
-	ipaddress=$(giveprompt "${lng_add_ipaddress}" $LOCALHOST) 
-	portnumber=$(giveprompt "${lng_add_port}" $PORT)
+	ipaddress=$(giveprompt "${lng_add_ipaddress}" $DEFAULT_IP)
+	portnumber=$(giveprompt "${lng_add_port}" $DEFAULT_PORT)
 	hostname=$(giveprompt "${lng_add_virtual_host}" "")
 
 	backup_host_file $BACK_FILE
