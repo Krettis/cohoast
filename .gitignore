@@ -11,3 +11,6 @@ Session.vim
 ### Directories ###
 backup/*
 !backup/.gitkeep
+
+### Test files ###
+hosts.txt

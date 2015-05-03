@@ -1,7 +1,10 @@
 FILE_LOCATION:
-  HOST: hosts.txt
+  HOST: host.txt
 DEFAULT:
+  IP: 127.0.0.1 
+  PORT: 80
   CATEGORY: default
 BLOCK:
+	IP: 127.0.0.1 
   CATEGORY: blacklist
 LANG: en 
