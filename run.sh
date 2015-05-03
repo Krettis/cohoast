@@ -1,13 +1,14 @@
 #!/bin/bash
 
-VERSION=0.0.6
+VERSION=0.2.0
 RELEASE_NAME="SAND"
 
 ### CONFIGURATION ###
 #--------------------------------------------
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/"
 HOSTS_FILE=$DIR"hosts.txt"
-BACK_FILE=$DIR"backup/hosts.backup.txt"
+BACK_DIR=$DIR"backup/"
+BACK_FILE=${BACK_DIR}"hosts.backup.txt"
 LOCALHOST="127.0.0.1"
 PORT="80"
 DEFAULT_CATEGORY="uncategorized"
@@ -33,7 +34,7 @@ if ! chfn_exists cohoast; then
 	return;
 fi 
 use_manual=0
-ch_options=(add block help)
+ch_options=(add backup block help)
 
 ### CONTROLLER
 #--------------------------------------------
@@ -43,13 +44,17 @@ if [ $# -eq 0 ]; then
 	clear
 	echo "$banner_menu"
 	echo -e "Please select your action for the use of cohost\n"
-	select menuselect in "$menu_option_add_host" $menu_option_quit; do
+	select menuselect in "$menu_option_add_host" "$menu_option_backup" "$menu_option_quit"; do
 		case $menuselect in
 			"$menu_option_add_host" )
 				echo "ok"
 				use_manual=1
 				break;;
-			$menu_option_quit )
+			"$menu_option_backup" )
+		    backup_host_file $BACK_FILE
+				echo -e "\n"$lng_backup_success
+				break;;
+			"$menu_option_quit" )
 				clear
 				return;
 		esac
@@ -100,6 +105,8 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 		else
 			show_usage add
 		fi
+	elif [ $1 == "backup" ]; then
+		backup_host_file $BACK_FILE
 	elif [ $1 == "block" ]; then
 		category=$BLOCK_CATEGORY
 		ipaddress=$BLOCK_IP 
