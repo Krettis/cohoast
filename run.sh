@@ -158,7 +158,5 @@ fi
 
 # CLEANUP
 #--------------------------------------------
-
 unset DEFAULT_PORT LOCALHOST FILE_LOCATION_HOST FILE_LOCATION_BACKUP banner_menu
-> hosts.tmp
 rm -f hosts.tmp
