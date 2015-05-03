@@ -11,15 +11,14 @@ addHost(){
 	local line_append=7
 	local insert_at_line_nr=0
 
-
 	# delete if the same line format is found
-	sed '/'"$line_format"'/ d' $HOSTS_FILE > hosts.tmp
+	sed '/'"$line_format"'/ d' $FILE_HOST > hosts.tmp
 
 	local line_found_category=$(sed -n '/'"#  $category_name"'/ =' hosts.tmp)
 
 	# A new category is added, with a different offset 
 	if [[ $line_found_category == '' ]] ; then
-	  line_append=$(($(cat $HOSTS_FILE | wc -l)+11))
+	  line_append=$(($(cat $FILE_HOST | wc -l)+11))
 		echo -e "$category_format" >> hosts.tmp
 	fi
 
@@ -28,10 +27,10 @@ addHost(){
 	atdf='a\
 		'$line_format' \
 		' 
-	sed  "$insert_at_line_nr""$atdf" hosts.tmp > $HOSTS_FILE
+	sed  "$insert_at_line_nr""$atdf" hosts.tmp > $FILE_HOST
 
 	return	
-	echo -e "\nAdding the following\n\nHostname: "$hostname"\nPortnumber: "$portnumber"\nCategory: "$category"\nIn file: "$HOSTS_FILE"\n"
+	echo -e "\nAdding the following\n\nHostname: "$hostname"\nPortnumber: "$portnumber"\nCategory: "$category"\nIn file: "$FILE_HOST"\n"
 
 	echo "Found category on line: "$line_found_category
 	echo "linenumber:: "$insertline

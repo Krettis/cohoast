@@ -17,6 +17,36 @@ function parse_yaml {
    }'
 }
 
+function load_language {
+  locale_found=$(locale | grep LANG | cut -d= -f2 | cut -d_ -f1 | cut -d\" -f2)
+  if [ $(in_array "${SUPPORTED_LANGUAGES[@]}" $locale_found) == "y" ]; then
+    lang=$locale_found 
+  else
+    lang=$DEFAULT_LANG
+  fi
+  source $(echo $DIR".dot/lang/."$lang)
+}
+
+function load_user_config {
+  eval $(parse_yaml ${DIR}config.yml)
+echo $FILE_LOCATION_HOST
+}
+
+
+function load_file_locations {
+
+	if [ -z "$FILE_LOCATION_HOST" ]; then
+		return;
+	else 
+		FILE_HOST=$FILE_LOCATION_HOST
+	fi
+
+	# check which machine using
+
+
+}
+
+
 function backup_host_file {
 
 	current_date=$(date "+%Y-%m-%d")
