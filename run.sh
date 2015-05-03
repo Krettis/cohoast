@@ -163,5 +163,4 @@ fi
 #--------------------------------------------
 
 unset PORT LOCALHOST banner_menu
-> hosts.tmp
 rm -f hosts.tmp
