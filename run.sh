@@ -8,12 +8,8 @@ RELEASE_NAME="SAND"
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/"
 FILE_HOST=$DIR"hosts.txt"
 BACK_DIR=$DIR"backup/"
-BACK_FILE=${BACK_DIR}"hosts.backup.txt"
 LOCALHOST="127.0.0.1"
-PORT="80"
-DEFAULT_CATEGORY="uncategorized"
 SUPPORTED_LANGUAGES=( "en" "nl" )
-DEFAULT_LANG="en"
 
 ### LOAD FILES 
 #--------------------------------------------
