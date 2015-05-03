@@ -6,7 +6,7 @@ RELEASE_NAME="SAND"
 ### CONFIGURATION ###
 #--------------------------------------------
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/"
-HOSTS_FILE=$DIR"hosts.txt"
+FILE_HOST=$DIR"hosts.txt"
 BACK_DIR=$DIR"backup/"
 BACK_FILE=${BACK_DIR}"hosts.backup.txt"
 LOCALHOST="127.0.0.1"
@@ -169,6 +169,6 @@ fi
 # CLEANUP
 #--------------------------------------------
 
-unset PORT LOCALHOST banner_menu
+unset DEFAULT_PORT LOCALHOST FILE_LOCATION_HOST FILE_LOCATION_BACKUP banner_menu
 > hosts.tmp
 rm -f hosts.tmp
