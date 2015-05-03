@@ -38,7 +38,6 @@ if [ $# -eq 0 ]; then
 	select menuselect in "$menu_option_add_host" "$menu_option_backup" "$menu_option_quit"; do
 		case $menuselect in
 			"$menu_option_add_host" )
-				echo "ok"
 				use_manual=1
 				break;;
 			"$menu_option_backup" )
@@ -147,7 +146,7 @@ fi
 if [ $use_manual -eq 1 ]; then
 ## get information
 	category=$(giveprompt "${lng_which_category}" $DEFAULT_CATEGORY)
-	ipaddress=$(giveprompt "${lng_add_ipaddress}" $DEFAULT_IP)
+	ipaddress=$(giveprompt "${lng_add_ipaddress}" $DEFAULT_IP) 
 	portnumber=$(giveprompt "${lng_add_port}" $DEFAULT_PORT)
 	hostname=$(giveprompt "${lng_add_virtual_host}" "")
 
