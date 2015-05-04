@@ -1,0 +1,8 @@
+usage: cohoast backup [ [-f] [-m] [-c|--clean]  ]
+Creates a backup file from the latest version of the hosts file.
+
+Optional:
+
+  -c|--clean          Annotations like date creation,  are not set
+  -f                  Filelocation, default is from the configuration 
+  -m                  Extra annotation/message, to write in the file 	
