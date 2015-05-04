@@ -96,7 +96,32 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 			show_usage add
 		fi
 	elif [ $1 == "backup" ]; then
-		backup_host_file $BACK_FILE
+
+		message=
+		use_annotation=1
+		args=`getopt abo: $*`
+		for i
+		do
+		case "$i"
+		in
+				-c|--clean)
+					use_annotation=0;shift;;
+				-f)
+					BACK_FILE="$3";shift;
+					shift;;
+				-m)
+					message="$3";shift;
+					shift;;
+				--)
+				shift; break;;
+		esac
+		done
+
+		if [ $use_annotation -eq 0 ]; then
+			message=0
+		fi
+
+		backup_host_file $BACK_FILE "$message"
 	elif [ $1 == "block" ]; then
 		category=$BLOCK_CATEGORY
 		ipaddress=$BLOCK_IP 
