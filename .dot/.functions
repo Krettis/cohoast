@@ -49,13 +49,26 @@ function load_file_locations {
 
 function backup_host_file {
 
-	current_date=$(date "+%Y-%m-%d")
-	current_time=$(date "+%H:%M:%S")
-	bu_time=$(date "+%Y%m%d_%H%M%S")
+	local current_date=$(date "+%Y-%m-%d")
+	local current_time=$(date "+%H:%M:%S")
+	local bu_time=$(date "+%Y%m%d_%H%M%S")
+
 	local backup_file=$1
 	local backup_file_date=${BACK_DIR}"bu_"${bu_time}".bak"
-	backup_comment=$(printf "# This is a backup from %s at %s, made automatically. Only use this when the host file seems to be broken\n" $current_date $current_time) 
-	echo $backup_comment > $backup_file
+	local annotation_time=$(printf "# This is a backup from %s at %s. Only use this when the host file seems to be broken\n" $current_date $current_time)
+	local comment=
+
+	if [ ! -z "$2" ]; then
+		if [ "$2" == "0" ]; then
+			annotation_time=
+		else
+			comment=$(echo -e "# Remark: "$2)
+		fi
+	fi
+
+# make a format for the backup to fil in
+	echo $annotation_time > $backup_file
+	echo $comment >> $backup_file
 	cat $HOSTS_FILE >> $backup_file
 	cat $backup_file >> $backup_file_date
 
