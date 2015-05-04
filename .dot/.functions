@@ -29,20 +29,17 @@ function load_language {
 
 function load_user_config {
   eval $(parse_yaml ${DIR}config.yml)
-echo $FILE_LOCATION_HOST
 }
 
 
 function load_file_locations {
 
 	if [ -z "$FILE_LOCATION_HOST" ]; then
+	# check which machine using
 		return;
 	else 
 		FILE_HOST=$FILE_LOCATION_HOST
 	fi
-
-	# check which machine using
-
 
 }
 

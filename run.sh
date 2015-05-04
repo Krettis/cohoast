@@ -96,19 +96,19 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 			show_usage add
 		fi
 	elif [ $1 == "backup" ]; then
-
+	
 		message=
 		use_annotation=1
 		args=`getopt abo: $*`
 		for i
 		do
-		case "$i"
-		in
+	 	case "$i"
+	  	in
 				-c|--clean)
 					use_annotation=0;shift;;
 				-f)
 					BACK_FILE="$3";shift;
-					shift;;
+					shift;;	
 				-m)
 					message="$3";shift;
 					shift;;
@@ -184,4 +184,5 @@ fi
 # CLEANUP
 #--------------------------------------------
 unset DEFAULT_PORT LOCALHOST FILE_LOCATION_HOST FILE_LOCATION_BACKUP banner_menu
+unset VERSION RELEASE_NAME
 rm -f hosts.tmp
