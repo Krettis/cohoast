@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=0.5.0
+VERSION=0.5.1
 RELEASE_NAME="Sand"
 
 ### CONFIGURATION ###
@@ -111,7 +111,7 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 						break;
 					fi
 					BACK_FILE="$3";shift;
-					shift;;	
+					shift;;
 				-m)
 					if [ -z $3 ]; then
 						break;
@@ -124,7 +124,7 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 		done
 
 		if [ ! -z "$2" ]; then
-			show_usage backup
+			show_usage backup 
 			return
 		fi
 
