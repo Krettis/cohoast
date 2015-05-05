@@ -15,6 +15,11 @@ function	usage_add
       #echo "ls | l        Lists the hosts configuration files"
       #kecho "usage: cohoast [[add | a | remove | rm] [-h | --help] [-f | --file] [ ports ] [ ls | l ]]"
 
+function usage_backup
+{
+	usagetxt backup
+}
+
 function usage_block
 {	
 	usagetxt block

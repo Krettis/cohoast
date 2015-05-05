@@ -123,6 +123,11 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 		esac
 		done
 
+		if [ ! -z "$2" ]; then
+			show_usage backup
+			return
+		fi
+
 		if [ $use_annotation -eq 0 ]; then
 			message=0
 		fi

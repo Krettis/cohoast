@@ -1,4 +1,4 @@
-usage: cohoast backup [ [-f] [-m] [-c|--clean]  ]
+usage: cohoast backup [ [-f args ] [-m args ] [-c|--clean]  ]
 Creates a backup file from the latest version of the hosts file.
 
 Optional:
