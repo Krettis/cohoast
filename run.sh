@@ -107,9 +107,15 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 				-c|--clean)
 					use_annotation=0;shift;;
 				-f)
+					if [ -z $3 ]; then
+						break;
+					fi
 					BACK_FILE="$3";shift;
 					shift;;	
 				-m)
+					if [ -z $3 ]; then
+						break;
+					fi
 					message="$3";shift;
 					shift;;
 				--)
