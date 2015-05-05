@@ -17,8 +17,8 @@ This project comes to help for completing the last step for setting up the envir
 #### Dealing with the virtual hosts in Apache, Nginx, etc
 That is a separate concern. The `hosts`-file and `virtual host configuration`-file should not go together. Plans are for making a callback, so maybe that could help a lot of loose ends (although docker already helps you with this).
 
-### Other motive
-I'm trying to get to know Bash some more. Doing some projects like these will get to know the more basic stuff. So I got that going for me, which is nice. 
+### Other motives
+I'm trying to get to know Bash some more. Doing some projects like these will get to know the more basic stuff. Also getting a better idea of what to commit in git, how the commit message should be formatted and when to move on to the next issue. So I got that going for me, which is nice. 
 
 #### And last
 This project is get myself working on better documentation. I've learned that no matter how good/powerful your tool is, if the documentation is poor people will just go to the alternative. Which may be suck, but it is __known__ to suck. 
