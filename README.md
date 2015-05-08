@@ -52,6 +52,24 @@ Adding a host
 
     $ cohoast add [ hostname ]
     
+    
+    
+    
+
+## Contributing
+<!--
+### Hooks
+
+
+### Lint
+shellcheck
+
+### Testing
+
+bats
+
+-->
+    
 ## Finally
 
 ### Plans
