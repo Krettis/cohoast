@@ -5,6 +5,7 @@ before_install:
     - git clone https://github.com/sstephenson/bats.git tmp
 install:
     - export PATH=tmp/bin:$PATH
+    - sudo add-apt-repository -y "deb http://mirrors.kernel.org/ubuntu utopic main universe"
     - sudo apt-get -y update
     - sudo apt-get -y install shellcheck
 script: make commit
