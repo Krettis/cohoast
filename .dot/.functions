@@ -38,7 +38,7 @@ function load_file_locations {
 	# check which machine using
 		return;
 	else 
-		FILE_HOST=$FILE_LOCATION_HOST
+		FILE_HOST="$FILE_LOCATION_HOST"
 	fi
 
 }
@@ -66,7 +66,7 @@ function backup_host_file {
 # make a format for the backup to fil in
 	echo $annotation_time > $backup_file
 	echo $comment >> $backup_file
-	cat $HOSTS_FILE >> $backup_file
+	cat $FILE_HOST >> $backup_file
 	cat $backup_file >> $backup_file_date
 
 }

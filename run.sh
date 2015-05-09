@@ -3,19 +3,22 @@
 VERSION=0.5.1
 RELEASE_NAME="Sand"
 
+
 ### CONFIGURATION ###
 #--------------------------------------------
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/"
-FILE_HOST=$DIR"hosts.txt"
-BACK_DIR=$DIR"backup/"
+FILE_HOST="$DIR""hosts.txt"
+BACK_DIR="$DIR""backup/"
 LOCALHOST="127.0.0.1"
 SUPPORTED_LANGUAGES=( "en" "nl" )
+LOG=0
+
 
 ### LOAD FILES 
 #--------------------------------------------
-source $DIR.dot/.config
-source $DIR.dot/.functions
-source $DIR.dot/.art
+source "$DIR".dot/.config
+source "$DIR".dot/.functions
+source "$DIR".dot/.art
 load_user_config
 load_language
 load_file_locations
@@ -26,6 +29,7 @@ if ! chfn_exists cohoast; then
 fi 
 use_manual=0
 ch_options=(add backup block help)
+
 
 ### CONTROLLER
 #--------------------------------------------
@@ -41,8 +45,8 @@ if [ $# -eq 0 ]; then
 				use_manual=1
 				break;;
 			"$menu_option_backup" )
-		    backup_host_file $BACK_FILE
-				echo -e "\n"$lng_backup_success
+		    backup_host_file "$BACK_FILE"
+				echo -e "\n""$lng_backup_success"
 				break;;
 			"$menu_option_quit" )
 				clear
@@ -51,14 +55,14 @@ if [ $# -eq 0 ]; then
 	done
 elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 
-	if [ $1 == "add" ]; then
+	if [ "$1" == "add" ]; then
 		if [ $# -gt 1 ]; then
 			category=$DEFAULT_CATEGORY
 			ipaddress=$DEFAULT_IP
 			portnumber=$DEFAULT_PORT
 			hostname=
 
-			args=`getopt abo: $*`
+			args=$(getopt abo: $*)
 			for i
 			do
 		 	case "$i"
@@ -84,22 +88,22 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 				hostname="$2"
 			fi
 
-			if [ -z $hostname ]; then
+			if [ -z "$hostname" ]; then
 				show_usage add
 				return
 			fi
 
-			backup_host_file $BACK_FILE
-			source $DIR.dot/addhost.sh
+		backup_host_file "$BACK_FILE"
+			source "$DIR".dot/addhost.sh
 			addHost
 		else
 			show_usage add
 		fi
-	elif [ $1 == "backup" ]; then
+	elif [ "$1" == "backup" ]; then
 	
 		message=
 		use_annotation=1
-		args=`getopt abo: $*`
+		args=$(getopt abo: $*)
 		for i
 		do
 	 	case "$i"
@@ -107,13 +111,13 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 				-c|--clean)
 					use_annotation=0;shift;;
 				-f)
-					if [ -z $3 ]; then
+					if [ -z "$3" ]; then
 						break;
 					fi
 					BACK_FILE="$3";shift;
 					shift;;
 				-m)
-					if [ -z $3 ]; then
+					if [ -z "$3" ]; then
 						break;
 					fi
 					message="$3";shift;
@@ -128,41 +132,41 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 			return
 		fi
 
-		if [ $use_annotation -eq 0 ]; then
+		if [ "$use_annotation" -eq 0 ]; then
 			message=0
 		fi
 
-		backup_host_file $BACK_FILE "$message"
-	elif [ $1 == "block" ]; then
+		backup_host_file "$BACK_FILE" "$message"
+	elif [ "$1" == "block" ]; then
 		category=$BLOCK_CATEGORY
 		ipaddress=$BLOCK_IP 
 		portnumber=0
 
-		if [ -z $2 ]; then
+		if [ -z "$2" ]; then
 			show_usage block
 			return
 		fi
 
-		hostname=$(dig +short -x $2)
-		if [ -z $hostname ]; then
-			echo $lng_block_nohost
+		hostname=$(dig +short -x "$2")
+		if [ -z "$hostname" ]; then
+			echo "$lng_block_nohost"
 			return
 		fi
 
-		source $DIR.dot/addhost.sh
+		source "$DIR".dot/addhost.sh
 		addHost
 	else
 		show_usage
 	fi
 else
-	args=`getopt abo: $* 2>/dev/null`
+	args=$(getopt abo: $* 2>/dev/null)
 	
 	for i
 	do
  	case "$i"
   	in
 			-v|--version)
-				echo -e "v"$VERSION" - "$RELEASE_NAME
+				echo -e "v""$VERSION"" - ""$RELEASE_NAME"
 				return;shift;;
 			-*)
 				shift; break;;
@@ -179,21 +183,35 @@ fi
 
 # MANUAL ADD
 #--------------------------------------------
-if [ $use_manual -eq 1 ]; then
+if [ "$use_manual" -eq 1 ]; then
 ## get information
-	category=$(giveprompt "${lng_which_category}" $DEFAULT_CATEGORY)
-	ipaddress=$(giveprompt "${lng_add_ipaddress}" $DEFAULT_IP) 
-	portnumber=$(giveprompt "${lng_add_port}" $DEFAULT_PORT)
+	category=$(giveprompt "${lng_which_category}" "$DEFAULT_CATEGORY")
+	ipaddress=$(giveprompt "${lng_add_ipaddress}" "$DEFAULT_IP") 
+	portnumber=$(giveprompt "${lng_add_port}" "$DEFAULT_PORT")
 	hostname=$(giveprompt "${lng_add_virtual_host}" "")
 
-	backup_host_file $BACK_FILE
-	source $DIR.dot/addhost.sh
+	backup_host_file "$BACK_FILE"
+	source "$DIR".dot/addhost.sh
 	addHost
+fi
+
+
+# LOG / REPORT
+#---------------------------------------------
+if [ "$LOG" -eq 1 ]; then
+	echo "$FILE_HOST"
+	echo "$BACK_DIR"
+	echo "$LOCALHOST"
+	for i in "${SUPPORTED_LANGUAGES[@]}"; do echo $i; done	
+	echo "$category"
+	echo "$ipaddress"
+	echo "$hostname"
+	echo "$portnumber"
 fi
 
 
 # CLEANUP
 #--------------------------------------------
-unset DEFAULT_PORT LOCALHOST FILE_LOCATION_HOST FILE_LOCATION_BACKUP banner_menu
+unset FILE_HOST DEFAULT_PORT LOCALHOST FILE_LOCATION_HOST FILE_LOCATION_BACKUP banner_menu
 unset VERSION RELEASE_NAME
 rm -f hosts.tmp
