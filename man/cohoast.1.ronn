@@ -1,0 +1,34 @@
+hello(1) -- greets bleh the world, or another arbitrary target 
+====
+
+## SYNOPSIS
+  `hello` [<target>]
+
+## DESCRIPTION
+  hello(1) is a program that greets either  
+
+- the entire world, if <target> is not supplied, or  
+- an arbitrary person, group, or other target.
+
+## EXAMPLES
+
+  To greet the entire world (note: the world's reciprocal behavior is undefined):      
+			hello  
+
+To greet the reader of this post and make them feel welcome:      
+
+			hello 
+
+'Spin reader'
+
+
+## DIAGNOSTICS  
+Returns 0 on successful greeting.
+
+
+## AUTHOR  
+Matt Behrens <matt.behrens@atomicobject.com>  
+
+## SEE ALSO  
+goodbye(1)
+ No newline at end of file
