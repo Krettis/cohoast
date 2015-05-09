@@ -1,8 +1,11 @@
 Cohoast 
 ===
+
 Manage your hostfile in the terminal - ___v0.1.0___ _'Sand'_ [♫](https://play.spotify.com/track/0pu6LHgjcYVQZPnPgxFbzi) 
 
 ![Logo above the lonely railroad](http://i.imgur.com/S0UDcX1.jpg "Influence your hostfile in the terminal")
+
+[![Build Status](https://travis-ci.org/Krettis/cohoast.svg?branch=develop)](https://travis-ci.org/Krettis/cohoast)
 
 
 ## The power of a single line
