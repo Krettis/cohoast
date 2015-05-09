@@ -86,13 +86,13 @@ function show_usage {
 
 function giveprompt {
 
-	givehint=""
+	local givehint=""
 	if [[ -n "$2" ]]; then
 		givehint="[$2] "
 	fi 
 	
-	question=$1" $givehint: "
-	default=$2
+	local question=$1" $givehint: "
+	local default=$2
 	read -p "$question" answer
        if [ -z "$answer" ];then
 	       answer=$default
@@ -115,12 +115,13 @@ function in_array {
     return 1
 }
 
-function chfn_exists {
 
-	result="`type -t $1`"
+function chfn_exists {
+	local result="`type -t $1`"
 	if [ "$result" == 'function' ]; then
 		return 0
 	else
 		return 1
 	fi
 }
+
