@@ -1,2 +1,9 @@
+#!env/yaml
+
 language: bash
+before_install:
+    - git clone https://github.com/sstephenson/bats.git
+install:
+    - cd bats
+    - ./install.sh /usr/local
 script: make commit
