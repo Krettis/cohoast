@@ -2,7 +2,12 @@
 
 language: bash
 before_install:
-    - git clone https://github.com/sstephenson/bats.git
+    - git clone https://github.com/sstephenson/bats.git tmp
 install:
-    - ln -s bats/libexec/bats bats
+    - export PATH=tmp/bin:$PATH
+    - sudo apt-get -y update
+    - sudo apt-get -y install shellcheck
 script: make commit
+notifications:
+  email:
+    on_success: never
