@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # MENU
-menu_title="Please select your action for the use of cohost"
+menu_title="Please select your action for the use of cohoast"
 menu_option_add_host="Add hostname"
 menu_option_quit="Quit"
 menu_option_backup="Do a backup"
@@ -11,6 +11,7 @@ lng_which_category="In which category has this to be put?"
 lng_add_ipaddress="To which ipaddress has it to be referenced?"
 lng_add_port="What is the portnumber?"
 lng_add_virtual_host="What is the name of the virtual host?"
+lng_add_success="Host is added!"
 
 # MESSAGES
 lng_block_nohost="Could not find hostname to block"

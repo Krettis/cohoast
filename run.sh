@@ -27,32 +27,13 @@ if ! chfn_exists cohoast; then
 	source .dot/install.sh
 	return;
 fi 
-use_manual=0
 ch_options=(add backup block help)
 
 
 ### CONTROLLER
 #--------------------------------------------
 if [ $# -eq 0 ]; then
-
-	## MENU	
-	clear
-	echo "$banner_menu"
-	echo -e "Please select your action for the use of cohost\n"
-	select menuselect in "$menu_option_add_host" "$menu_option_backup" "$menu_option_quit"; do
-		case $menuselect in
-			"$menu_option_add_host" )
-				use_manual=1
-				break;;
-			"$menu_option_backup" )
-		    backup_host_file "$BACK_FILE"
-				echo -e "\n""$lng_backup_success"
-				break;;
-			"$menu_option_quit" )
-				clear
-				return;
-		esac
-	done
+  source "$DIR".dot/menu.sh
 elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 
 	if [ "$1" == "add" ]; then
@@ -178,21 +159,6 @@ else
 	## NOTHING FOUND EXIT
 	show_usage
 	return
-fi
-
-
-# MANUAL ADD
-#--------------------------------------------
-if [ "$use_manual" -eq 1 ]; then
-## get information
-	category=$(giveprompt "${lng_which_category}" "$DEFAULT_CATEGORY")
-	ipaddress=$(giveprompt "${lng_add_ipaddress}" "$DEFAULT_IP") 
-	portnumber=$(giveprompt "${lng_add_port}" "$DEFAULT_PORT")
-	hostname=$(giveprompt "${lng_add_virtual_host}" "")
-
-	backup_host_file "$BACK_FILE"
-	source "$DIR".dot/addhost.sh
-	addHost
 fi
 
 
