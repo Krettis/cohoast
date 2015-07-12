@@ -1,8 +1,6 @@
 #!/bin/bash
-
 VERSION=0.5.1
 RELEASE_NAME="Sand"
-
 
 ### CONFIGURATION ###
 #--------------------------------------------
@@ -12,7 +10,8 @@ BACK_DIR="$DIR""backup/"
 LOCALHOST="127.0.0.1"
 SUPPORTED_LANGUAGES=( "en" "nl" )
 LOG=0
-
+# temporarily, should be an array
+declare lng_block_nohost
 
 ### LOAD FILES 
 #--------------------------------------------
@@ -38,9 +37,9 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 
 	if [ "$1" == "add" ]; then
 		if [ $# -gt 1 ]; then
-			category=$DEFAULT_CATEGORY
-			ipaddress=$DEFAULT_IP
-			portnumber=$DEFAULT_PORT
+			category="$DEFAULT_CATEGORY"
+			ipaddress="$DEFAULT_IP"
+			portnumber="$DEFAULT_PORT"
 			hostname=
 
 			args=$(getopt abo: $*)
@@ -174,7 +173,6 @@ if [ "$LOG" -eq 1 ]; then
 	echo "$hostname"
 	echo "$portnumber"
 fi
-
 
 # CLEANUP
 #--------------------------------------------
