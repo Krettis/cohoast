@@ -1,8 +1,6 @@
 #!/bin/bash
-
 VERSION=0.5.1
 RELEASE_NAME="Sand"
-
 
 ### CONFIGURATION ###
 #--------------------------------------------
@@ -12,7 +10,8 @@ BACK_DIR="$DIR""backup/"
 LOCALHOST="127.0.0.1"
 SUPPORTED_LANGUAGES=( "en" "nl" )
 LOG=0
-
+# temporarily, should be an array
+declare lng_block_nohost
 
 ### LOAD FILES 
 #--------------------------------------------
@@ -27,39 +26,20 @@ if ! chfn_exists cohoast; then
 	source .dot/install.sh
 	return;
 fi 
-use_manual=0
 ch_options=(add backup block help)
 
 
 ### CONTROLLER
 #--------------------------------------------
 if [ $# -eq 0 ]; then
-
-	## MENU	
-	clear
-	echo "$banner_menu"
-	echo -e "Please select your action for the use of cohost\n"
-	select menuselect in "$menu_option_add_host" "$menu_option_backup" "$menu_option_quit"; do
-		case $menuselect in
-			"$menu_option_add_host" )
-				use_manual=1
-				break;;
-			"$menu_option_backup" )
-		    backup_host_file "$BACK_FILE"
-				echo -e "\n""$lng_backup_success"
-				break;;
-			"$menu_option_quit" )
-				clear
-				return;
-		esac
-	done
+  source "$DIR".dot/menu.sh
 elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 
 	if [ "$1" == "add" ]; then
 		if [ $# -gt 1 ]; then
-			category=$DEFAULT_CATEGORY
-			ipaddress=$DEFAULT_IP
-			portnumber=$DEFAULT_PORT
+			category="$DEFAULT_CATEGORY"
+			ipaddress="$DEFAULT_IP"
+			portnumber="$DEFAULT_PORT"
 			hostname=
 
 			args=$(getopt abo: $*)
@@ -181,21 +161,6 @@ else
 fi
 
 
-# MANUAL ADD
-#--------------------------------------------
-if [ "$use_manual" -eq 1 ]; then
-## get information
-	category=$(giveprompt "${lng_which_category}" "$DEFAULT_CATEGORY")
-	ipaddress=$(giveprompt "${lng_add_ipaddress}" "$DEFAULT_IP") 
-	portnumber=$(giveprompt "${lng_add_port}" "$DEFAULT_PORT")
-	hostname=$(giveprompt "${lng_add_virtual_host}" "")
-
-	backup_host_file "$BACK_FILE"
-	source "$DIR".dot/addhost.sh
-	addHost
-fi
-
-
 # LOG / REPORT
 #---------------------------------------------
 if [ "$LOG" -eq 1 ]; then
@@ -208,7 +173,6 @@ if [ "$LOG" -eq 1 ]; then
 	echo "$hostname"
 	echo "$portnumber"
 fi
-
 
 # CLEANUP
 #--------------------------------------------

@@ -5,3 +5,4 @@ DEFAULT:
 BLOCK:
   CATEGORY: blacklist
 LANG: en 
+LOG: 0
