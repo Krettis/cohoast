@@ -12,6 +12,7 @@ SUPPORTED_LANGUAGES=( "en" "nl" )
 LOG=0
 # temporarily, should be an array
 declare lng_block_nohost
+declare lng_remove_nohost
 
 ### LOAD FILES 
 #--------------------------------------------
@@ -91,6 +92,7 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 
     find_host_name=$(found_host "$2") 
     if [ -z "$(found_host "$2")" ]; then
+      error_message "$lng_remove_nohost"
       return
     fi
     backup_host_file "$BACK_FILE"
