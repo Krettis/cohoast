@@ -12,6 +12,7 @@ SUPPORTED_LANGUAGES=( "en" "nl" )
 LOG=0
 # temporarily, should be an array
 declare lng_block_nohost
+declare lng_remove_nohost
 
 ### LOAD FILES 
 #--------------------------------------------
@@ -26,7 +27,7 @@ if ! chfn_exists cohoast; then
 	source .dot/install.sh
 	return;
 fi 
-ch_options=(add backup block help)
+ch_options=(add backup block remove help)
 
 
 ### CONTROLLER
@@ -73,13 +74,30 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 				return
 			fi
 
-		backup_host_file "$BACK_FILE"
+      backup_host_file "$BACK_FILE"
 			source "$DIR".dot/addhost.sh
 			addHost
 		else
 			show_usage add
 		fi
-	elif [ "$1" == "backup" ]; then
+
+  elif [ "$1" == "remove" ]; then
+
+    if [ -z "$2" ]; then
+      show_usage remove
+      return
+    fi
+
+    source "$DIR".dot/remove_host.sh
+
+    find_host_name=$(found_host "$2") 
+    if [ -z "$(found_host "$2")" ]; then
+      error_message "$lng_remove_nohost"
+      return
+    fi
+    backup_host_file "$BACK_FILE"
+    remove_host "$2"
+  elif [ "$1" == "backup" ]; then
 	
 		message=
 		use_annotation=1

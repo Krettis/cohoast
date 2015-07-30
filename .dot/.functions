@@ -125,3 +125,11 @@ function chfn_exists {
 	fi
 }
 
+
+function error_message
+{
+  if [ -z "$1" ]; then
+    return
+  fi
+  >&2 echo "$1"
+}

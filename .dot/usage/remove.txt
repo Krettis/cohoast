@@ -1,0 +1,3 @@
+usage: cohoast remove [ hostname ]
+This will remove the hostname from hosts-file
+

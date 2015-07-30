@@ -1,6 +1,7 @@
 #!/bin/bash
 
-addHost(){
+function addHost
+{
 
 	# config
 	local current_date=$(date "+%Y-%m-%d")
