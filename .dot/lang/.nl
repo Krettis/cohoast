@@ -3,6 +3,7 @@
 # MENU
 menu_title="Selecteer een optie voor COHOAST"
 menu_option_add_host="Voeg hostname toe"
+menu_option_remove_host="Verwijder een hostname"
 menu_option_quit="Ophouden"
 menu_option_backup="Doe een backup"
 
@@ -13,6 +14,10 @@ lng_add_port="Wat is het poortnummer?"
 lng_add_virtual_host="Welke naam heeft de virtuele host?"
 lng_add_success="Host is toegevoegd!"
 
+lng_prompt_remove_host="Wat is de hostname die verwijderd moet worden?"
+lng_remove_success="Hostname is succesvol verwijderd!"
+
 # MESSAGES
 lng_block_nohost="De hostname kon niet gevonden worden"
+lng_remove_nohost="De hostname is niet aanwezig"
 lng_backup_success="Een backup is aangemaakt!"

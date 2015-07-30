@@ -3,6 +3,7 @@
 # MENU
 menu_title="Please select your action for the use of cohoast"
 menu_option_add_host="Add hostname"
+menu_option_remove_host="Delete a hostname"
 menu_option_quit="Quit"
 menu_option_backup="Do a backup"
 
@@ -13,6 +14,10 @@ lng_add_port="What is the portnumber?"
 lng_add_virtual_host="What is the name of the virtual host?"
 lng_add_success="Host is added!"
 
+lng_prompt_remove_host="What is the hostname you want to delete?"
+lng_remove_success="Hostname has been deleted!"
+
 # MESSAGES
 lng_block_nohost="Could not find hostname to block"
+lng_remove_nohost="De hostname isn't found"
 lng_backup_success="Backup completed!"
