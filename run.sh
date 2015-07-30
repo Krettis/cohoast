@@ -73,7 +73,7 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 				return
 			fi
 
-		backup_host_file "$BACK_FILE"
+      backup_host_file "$BACK_FILE"
 			source "$DIR".dot/addhost.sh
 			addHost
 		else
@@ -86,7 +86,16 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
       show_usage remove
       return
     fi
-	elif [ "$1" == "backup" ]; then
+
+    source "$DIR".dot/remove_host.sh
+
+    find_host_name=$(found_host "$2") 
+    if [ -z "$(found_host "$2")" ]; then
+      return
+    fi
+    backup_host_file "$BACK_FILE"
+    remove_host "$2"
+  elif [ "$1" == "backup" ]; then
 	
 		message=
 		use_annotation=1
