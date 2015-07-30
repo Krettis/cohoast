@@ -26,7 +26,7 @@ if ! chfn_exists cohoast; then
 	source .dot/install.sh
 	return;
 fi 
-ch_options=(add backup block help)
+ch_options=(add backup block remove help)
 
 
 ### CONTROLLER
@@ -79,6 +79,13 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 		else
 			show_usage add
 		fi
+
+  elif [ "$1" == "remove" ]; then
+
+    if [ -z "$2" ]; then
+      show_usage remove
+      return
+    fi
 	elif [ "$1" == "backup" ]; then
 	
 		message=
