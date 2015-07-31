@@ -1,8 +1,8 @@
 #!/bin/bash
-# 
 # MENU
 keep_menu=1
 
+# shellcheck disable=SC2154
 while [ "$keep_menu" ]
 do
   manual_add=0
@@ -46,9 +46,11 @@ do
     hostname=$(giveprompt "${lng_add_virtual_host}" "")
 
     backup_host_file "$BACK_FILE"
-    source "$DIR".dot/addhost.sh
-    addHost
-    message="$lng_add_success"
+    source "${DIR}.dot/addhost.sh"
+    addHost "$category" "$ipaddress" "$portnumber" "$hostname"
+    if [ $? -eq 1 ]; then
+      message="$lng_add_success"
+    fi
   fi
 
   # MANUAL REMOVE

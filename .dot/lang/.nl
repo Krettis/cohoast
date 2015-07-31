@@ -13,7 +13,9 @@ lng_add_ipaddress="Naar welk ipadres moet het worden verwezen?"
 lng_add_port="Wat is het poortnummer?"
 lng_add_virtual_host="Welke naam heeft de virtuele host?"
 lng_add_success="Host is toegevoegd!"
+lng_add_fail="Er is iets mis gegaan, niet alles is ingevoerd"
 
+# REMOVE
 lng_prompt_remove_host="Wat is de hostname die verwijderd moet worden?"
 lng_remove_success="Hostname is succesvol verwijderd!"
 
