@@ -1,8 +1,8 @@
 #!/bin/bash
-# 
 # MENU
 keep_menu=1
 
+# shellcheck disable=SC2154
 while [ "$keep_menu" ]
 do
   manual_add=0
@@ -49,8 +49,8 @@ do
     source "${DIR}.dot/addhost.sh"
     addHost "$category" "$ipaddress" "$portnumber" "$hostname"
     if [ $? -eq 1 ]; then
-    message="$lng_add_success"
-  fi
+      message="$lng_add_success"
+    fi
   fi
 
   # MANUAL REMOVE
