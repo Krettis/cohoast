@@ -13,7 +13,9 @@ lng_add_ipaddress="To which ipaddress has it to be referenced?"
 lng_add_port="What is the portnumber?"
 lng_add_virtual_host="What is the name of the virtual host?"
 lng_add_success="Host is added!"
+lng_add_fail="Something went wrong, not all variables were given"
 
+# REMOVAL
 lng_prompt_remove_host="What is the hostname you want to delete?"
 lng_remove_success="Hostname has been deleted!"
 

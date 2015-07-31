@@ -46,9 +46,11 @@ do
     hostname=$(giveprompt "${lng_add_virtual_host}" "")
 
     backup_host_file "$BACK_FILE"
-    source "$DIR".dot/addhost.sh
-    addHost
+    source "${DIR}.dot/addhost.sh"
+    addHost "$category" "$ipaddress" "$portnumber" "$hostname"
+    if [ $? -eq 1 ]; then
     message="$lng_add_success"
+  fi
   fi
 
   # MANUAL REMOVE

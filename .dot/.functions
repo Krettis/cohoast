@@ -1,8 +1,13 @@
 #!/bin/bash
 
 function parse_yaml {
-   local prefix=$2
-   local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
+  local prefix=$2
+  local s='[[:space:]]*'
+  local w='[a-zA-Z0-9_]*'
+  local fs
+
+  fs=$(echo @|tr @ '\034')
+
    sed -ne "s|^\($s\):|\1|" \
         -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
         -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  $1 |
@@ -24,7 +29,7 @@ function load_language {
   else
     lang=$DEFAULT_LANG
   fi
-  source $(echo $DIR".dot/lang/."$lang)
+  source $DIR".dot/lang/."$lang
 }
 
 function load_user_config {
@@ -46,14 +51,22 @@ function load_file_locations {
 
 function backup_host_file {
 
-	local current_date=$(date "+%Y-%m-%d")
-	local current_time=$(date "+%H:%M:%S")
-	local bu_time=$(date "+%Y%m%d_%H%M%S")
+	local current_date
+	local current_time
+	local bu_time
 
-	local backup_file=$1
-	local backup_file_date=${BACK_DIR}"bu_"${bu_time}".bak"
-	local annotation_time=$(printf "# This is a backup from %s at %s. Only use this when the host file seems to be broken\n" $current_date $current_time)
+	local backup_file
+	local backup_file_date
+	local annotation_time
 	local comment=
+
+  current_date=$(date "+%Y-%m-%d")
+  current_time=$(date "+%H:%M:%S")
+  bu_time=$(date "+%Y%m%d_%H%M%S")
+
+  backup_file="$1"
+  backup_file_date="${BACK_DIR}bu_${bu_time}.bak"
+  annotation_time=$(printf "# This is a backup from %s at %s. Only use this when the host file seems to be broken\n" $current_date $current_time)
 
 	if [ ! -z "$2" ]; then
 		if [ "$2" == "0" ]; then
@@ -116,8 +129,11 @@ function in_array {
 }
 
 
-function chfn_exists {
-	local result="`type -t $1`"
+function chfn_exists 
+{
+	local result
+  result="$(type -t $1)"
+
 	if [ "$result" == 'function' ]; then
 		return 0
 	else
