@@ -32,5 +32,5 @@ function usage_remove
 
 function usagetxt
 {
-	cat ${DIR}".dot/usage/"$1".txt"
+	cat ${DIR}".dot/usage/${1}.txt"
 }
