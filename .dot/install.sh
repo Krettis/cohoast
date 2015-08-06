@@ -66,7 +66,7 @@ install_man_page () {
 # currently only osx
 get_man_folder () {
   local man_folder=
-  if [ -d "/usr/share/man/man1"]; then
+  if [ -d "/usr/share/man/man1" ]; then
     man_folder="/usr/share/man/man1"
   fi
   echo "$man_folder"
