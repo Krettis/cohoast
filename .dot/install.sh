@@ -2,10 +2,23 @@
 REMOTE=${REMOTE:-https://github.com/krettis/cohoast.git}
 TMPDIR=${TMPDIR:-/tmp}
 DEST=${DEST:-${TMPDIR}/cohoast-master}
+CURRENT_FOLDER="$(pwd)"
+
+
+warn (){
+  echo -e "\033[1;36mWarning: \033[1;37m$1\033[0;39m" > /dev/tty
+}
+message (){
+  echo -e "\033[0;34mInfo: \033[1;37m$1\033[0;39m" > /dev/tty
+}
+an_error_occurred () {
+  >&2 echo -e "\033[0;31mError:\033[1;31m $1\033[0;39m"
+}
+
 
 ## test if command exists
 ftest () {
-  echo "  info: Checking for ${1}..."
+  message "Checking for ${1}..."
   if ! type -f "${1}" > /dev/null 2>&1; then
     return 1
   else
@@ -17,50 +30,52 @@ ftest () {
 features () {
   for f in "${@}"; do
     ftest "${f}" || {
-      echo >&2 "  error: Missing \`${f}'! Make sure it exists and try again."
+      an_error_occurred "Missing \`${f}'! Make sure it exists and try again."
       return 1
     }
   done
   return 0
 }
 
-## main setup
-setup () {
-  echo "  info: Welcome to the 'cohoast' installer!"
+## main clone_cohoast
+clone_cohoast()
+{
+  local passed=1
+  message "Welcome to the 'cohoast' installer!"
   ## test for require features
   features git || return $?
 
   ## build
   {
-    echo
     cd "${TMPDIR}"
-    echo "  info: Creating temporary files..."
-    test -d "${DEST}" && { echo "  warn: Already exists: '${DEST}'"; }
+    message "Creating temporary files..."
+    test -d "${DEST}" && { warn "Already exists: '${DEST}'"; }
     rm -rf "${DEST}"
-    echo "  info: Fetching latest 'cohoast'..."
+    message "Fetching latest 'cohoast'..."
     git clone --depth=1 "${REMOTE}" "${DEST}" > /dev/null 2>&1
-    cd "${DEST}"
-    install_man_page
   } >&2
-  return $?
+
+  if [ ! "$?" -eq 0 ];then
+    an_error_occurred "Cloning the github repo failed"
+    passed=0
+  fi
+  return $passed
 }
 
 # INSTALLATION for the man page
 install_man_page () {
-  set -v
   local manfolder=
   local folder_cohoast=
-  local message="Failed to install manual"
 
   manfolder="$(get_man_folder)"
   folder_cohoast=$(pwd)
 
   if [ "$manfolder" ]; then
-    cp "${folder_cohoast}/man/cohoast.1" "${manfolder}/"
-    message="Installed the manual (man cohoast)"
+    sudo cp "${folder_cohoast}/man/cohoast.1" "${manfolder}/"
+    message "Installed the manual (man cohoast)"
+  else
+    an_error_occurred "Failed to install manual"
   fi
-  echo "$message"
-  call_in_profile
 }
 
 # currently only osx
@@ -74,8 +89,9 @@ get_man_folder () {
 
 # INSTALL THE COHOAST CALL
 call_in_profile () { 
-  echo "Trying to install cohoast call in profile..."
+  message "Trying to install cohoast call in profile..."
 
+  cd "${DEST}"
   folder_cohoast=$(pwd)
   profile_file=''
   if [ "$(uname)" == "Darwin" ]; then
@@ -84,25 +100,32 @@ call_in_profile () {
     profile_file='.bashrc'
   elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     # Do something under Windows NT platform
-    echo "Sorry windows is not supported for installation.\n Feel free to add this to your profile"
+    message "Sorry windows is not supported for installation.\n Feel free to add this to your profile"
     return;
   fi
 
   function_to_insert="\n# Edit your hostfile within the terminal\nfunction cohoast() { . ${folder_cohoast}/run.sh \$@ ;}"
-  echo $function_to_insert >> ~/$profile_file && source ~/$profile_file && source "${folder_cohoast}/.dot/.functions"
+  $(echo -e $function_to_insert >> ~/$profile_file) && source ~/$profile_file && source "${folder_cohoast}/.dot/.functions"
 
 
-  if chfn_exists cohoast; then
-    echo "Installation completed!"
-    echo "Type 'cohoast' to execute or 'man cohoast' for the manual"
-  else 
-    echo "Something went wrong :("
-    echo "Try to add the function manually in your profile: \n"
-    echo -e "\n$function_to_insert\n"
+  if ! chfn_exists cohoast; then
+    warn "Something went wrong :(\n
+    Try to add the function manually in your profile: \n
+    \n$function_to_insert\n"
   fi
 
   return;
 }
 
-setup
+finalize(){
+  cd "$CURRENT_FOLDER"
+  if [ $? -eq 0 ]; then
+    message "Installation completed!\nType '\033[0;36mcohoast\033[1;37m' to execute or '\033[0;36mman cohoast\033[1;37m' for the manual"
+  fi
+}
+
+clone_cohoast
+call_in_profile
+install_man_page
+finalize
 
