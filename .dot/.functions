@@ -38,27 +38,25 @@ function load_user_config {
 
 
 function load_file_locations {
-
-	if [ -z "$FILE_LOCATION_HOST" ]; then
-	# check which machine using
-		return;
-	else 
-		FILE_HOST="$FILE_LOCATION_HOST"
-	fi
-
+  if [ -z "$FILE_LOCATION_HOST" ]; then
+  # check which machine using
+    return;
+  else 
+    FILE_HOST="$FILE_LOCATION_HOST"
+  fi
 }
 
 
-function backup_host_file {
+function backup_host_file 
+{
+  local current_date
+  local current_time
+  local bu_time
 
-	local current_date
-	local current_time
-	local bu_time
-
-	local backup_file
-	local backup_file_date
-	local annotation_time
-	local comment=
+  local backup_file
+  local backup_file_date
+  local annotation_time
+  local comment=
 
   current_date=$(date "+%Y-%m-%d")
   current_time=$(date "+%H:%M:%S")
@@ -68,77 +66,78 @@ function backup_host_file {
   backup_file_date="${BACK_DIR}bu_${bu_time}.bak"
   annotation_time=$(printf "# This is a backup from %s at %s. Only use this when the host file seems to be broken\n" $current_date $current_time)
 
-	if [ ! -z "$2" ]; then
-		if [ "$2" == "0" ]; then
-			annotation_time=
-		else
-			comment=$(echo -e "# Remark: "$2)
-		fi
-	fi
+  if [ ! -z "$2" ]; then
+    if [ "$2" == "0" ]; then
+      annotation_time=
+    else
+      comment=$(echo -e "# Remark: "$2)
+    fi
+  fi
 
 # make a format for the backup to fil in
-	echo $annotation_time > $backup_file
-	echo $comment >> $backup_file
-	cat $FILE_HOST >> $backup_file
-	cat $backup_file >> $backup_file_date
-
+  echo $annotation_time > $backup_file
+  echo $comment >> $backup_file
+  cat $FILE_HOST >> $backup_file
+  cat $backup_file >> $backup_file_date
 }
 
-function show_usage {
-	source $DIR".dot/usage.sh"
-	fname="usage"
-	if [ ! -z $1 ]; then
-		fname+="_"$1
-	fi
-
-	$fname
-}
-
-
-
-
-function giveprompt {
-
-	local givehint=""
-	if [[ -n "$2" ]]; then
-		givehint="[$2] "
-	fi 
-	
-	local question=$1" $givehint: "
-	local default=$2
-	read -p "$question" answer
-       if [ -z "$answer" ];then
-	       answer=$default
-       fi	
-       echo $answer;
-}
-
-
-
-function in_array {
-    local n=$#
-    local value=${!n}
-    for ((i=1;i < $#;i++)) {
-        if [ "${!i}" == "${value}" ]; then
-            echo "y"
-            return 0
-        fi
-    }
-    echo "n"
-    return 1
-}
-
-
-function chfn_exists 
+function show_usage 
 {
-	local result
+  source $DIR".dot/usage.sh"
+  fname="usage"
+  if [ ! -z $1 ]; then
+    fname+="_"$1
+  fi
+
+  $fname
+}
+
+
+
+
+function giveprompt 
+{
+  local givehint=""
+  if [[ -n "$2" ]]; then
+    givehint="[$2] "
+  fi
+
+  local question=$1" $givehint: "
+  local default=$2
+  read -p "$question" answer
+  if [ -z "$answer" ];then
+   answer=$default
+  fi
+  echo $answer;
+}
+
+
+
+function in_array 
+{
+  local n=$#
+  local value=${!n}
+  for ((i=1;i < $#;i++)) {
+      if [ "${!i}" == "${value}" ]; then
+          echo "y"
+          return 0
+      fi
+  }
+  echo "n"
+  return 1
+}
+
+
+function chfn_exists
+{
+  local result
   result="$(type -t $1)"
 
-	if [ "$result" == 'function' ]; then
-		return 0
-	else
-		return 1
-	fi
+  if [ "$result" == 'function' ]; then
+    return 0
+  else
+    return 1
+  fi
 }
 
 
@@ -149,3 +148,4 @@ function error_message
   fi
   >&2 echo "$1"
 }
+#EOF
