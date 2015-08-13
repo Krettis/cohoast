@@ -75,7 +75,7 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 			fi
 
       backup_host_file "$BACK_FILE"
-			source "$DIR".dot/addhost.sh
+			source "$DIR".dot/add_host.sh
 			addHost "$category" "$ipaddress" "$portnumber" "$hostname"
 		else
 			show_usage add

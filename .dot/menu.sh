@@ -46,7 +46,7 @@ do
     hostname=$(giveprompt "${lng_add_virtual_host}" "")
 
     backup_host_file "$BACK_FILE"
-    source "${DIR}.dot/addhost.sh"
+    source "${DIR}.dot/add_host.sh"
     addHost "$category" "$ipaddress" "$portnumber" "$hostname"
     if [ $? -eq 1 ]; then
       message="$lng_add_success"
