@@ -24,9 +24,9 @@ load_language
 load_file_locations
 
 if ! chfn_exists cohoast; then
-	source .dot/install.sh
-	return;
-fi 
+  source .dot/install.sh "$(pwd)"
+  return;
+fi
 ch_options=(add backup block remove help)
 
 
