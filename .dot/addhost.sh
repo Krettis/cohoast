@@ -20,8 +20,8 @@ function addHost
 
   current_date=$(date "+%Y-%m-%d")
   file_format=${DIR}".dot/art/category.txt"
-  category_name=$(echo $category | tr '[:lower:]' '[:upper:]')
-  category_format="\n$(sed 's/CATEGORYNAME/'$category_name'/g' <  $file_format | sed 's/nr/##/g' | sed 's/date_c/'$current_date'/g' | sed 's/date_u/0000-00-00/g')\n\n\n\n\n\n"
+  category_name=$(echo "$category" | tr '[:lower:]' '[:upper:]')
+  category_format="\n$(sed 's/CATEGORYNAME/'"$category_name"'/g' <  "$file_format" | sed 's/nr/##/g' | sed 's/date_c/'"$current_date"'/g' | sed 's/date_u/0000-00-00/g')\n\n\n\n\n\n"
   line_format=$(echo -e "$ipaddress:$portnumber\t$hostname\n")
 
   # Check if incoming is defined
@@ -31,7 +31,7 @@ function addHost
   fi
 
 	# delete if the same line format is found
-	sed '/'"$line_format"'/ d' $FILE_HOST > hosts.tmp
+	sed '/'"$line_format"'/ d' "$FILE_HOST" > hosts.tmp
 
   line_found_category=$(sed -n '/'"#  $category_name"'/ =' hosts.tmp)
 
@@ -46,7 +46,7 @@ function addHost
 	atdf='a\
 		'$line_format' \
 		' 
-	sed  "$insert_at_line_nr""$atdf" hosts.tmp > $FILE_HOST
+	sed  "$insert_at_line_nr""$atdf" hosts.tmp > "$FILE_HOST"
   
 	return 1
 	echo -e "\nAdding the following\n\nHostname: ${hostname}\nPortnumber: ${portnumber}\nCategory: ${category}\nIn file: ${FILE_HOST}\n"
