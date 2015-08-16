@@ -4,7 +4,7 @@ PAGES := cohoast.1
 BATS := bats
 CHECK:= shellcheck
 ALL:= test lint
-LINT_FILES := run.sh .dot/usage.sh .dot/.art .dot/.functions .dot/menu.sh .dot/add_host.sh .dot/remove_host.sh
+LINT_FILES := run.sh .dot/usage.sh .dot/.art .dot/.functions .dot/menu.sh .dot/add_host.sh .dot/block_host.sh .dot/remove_host.sh
 COMMIT := test lint
 
 # GROUPED
