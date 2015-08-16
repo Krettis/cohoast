@@ -4,6 +4,7 @@
 menu_title="Please select your action for the use of cohoast"
 menu_option_add_host="Add hostname"
 menu_option_remove_host="Delete a hostname"
+menu_option_block_host="Block hostname"
 menu_option_quit="Quit"
 menu_option_backup="Do a backup"
 
@@ -18,6 +19,10 @@ lng_add_fail="Something went wrong, not all variables were given"
 # REMOVAL
 lng_prompt_remove_host="What is the hostname you want to delete?"
 lng_remove_success="Hostname has been deleted!"
+
+# BLOCK
+lng_prompt_block_host="Please specify hostname or ipaddress you want to block"
+lng_block_success="Hostname has been blocked!"
 
 # MESSAGES
 lng_block_nohost="Could not find hostname to block"

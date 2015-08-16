@@ -124,7 +124,11 @@ finalize(){
   fi
 }
 
-clone_cohoast
+if [ -z "$1" ]; then
+  clone_cohoast
+else
+ DEST="$1"
+fi
 call_in_profile
 install_man_page
 finalize

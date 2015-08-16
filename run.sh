@@ -24,9 +24,9 @@ load_language
 load_file_locations
 
 if ! chfn_exists cohoast; then
-	source .dot/install.sh
-	return;
-fi 
+  source .dot/install.sh "$(pwd)"
+  return;
+fi
 ch_options=(add backup block remove help)
 
 
@@ -75,7 +75,7 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 			fi
 
       backup_host_file "$BACK_FILE"
-			source "$DIR".dot/addhost.sh
+			source "$DIR".dot/add_host.sh
 			addHost "$category" "$ipaddress" "$portnumber" "$hostname"
 		else
 			show_usage add
@@ -136,23 +136,16 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
 
 		backup_host_file "$BACK_FILE" "$message"
 	elif [ "$1" == "block" ]; then
-		category=$BLOCK_CATEGORY
-		ipaddress=$BLOCK_IP 
-		portnumber=0
-
 		if [ -z "$2" ]; then
 			show_usage block
 			return
 		fi
 
-		hostname=$(dig +short -x "$2")
-		if [ -z "$hostname" ]; then
-			echo "$lng_block_nohost"
-			return
-		fi
-
-		source "$DIR".dot/addhost.sh
-		addHost
+    source "$DIR".dot/block_host.sh
+    block_host "$BLOCK_CATEGORY" "$BLOCK_IP" "$2"
+    if [ $? -eq 1 ]; then
+      show_usage block
+    fi
 	else
 		show_usage
 	fi

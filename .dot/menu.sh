@@ -7,6 +7,7 @@ while [ "$keep_menu" ]
 do
   manual_add=0
   manual_remove=0
+  manual_block=0
   message=
   clear
   echo "$banner_menu"
@@ -14,6 +15,7 @@ do
   select menuselect in \
     "$menu_option_add_host"\
     "$menu_option_remove_host"\
+    "$menu_option_block_host"\
     "$menu_option_backup"\
     "$menu_option_quit"\
     ; do
@@ -23,6 +25,9 @@ do
       break;;
     "$menu_option_remove_host" )
       manual_remove=1
+      break;;
+    "$menu_option_block_host" )
+      manual_block=1
       break;;
      "$menu_option_backup" )
         backup_host_file "$BACK_FILE"
@@ -46,7 +51,7 @@ do
     hostname=$(giveprompt "${lng_add_virtual_host}" "")
 
     backup_host_file "$BACK_FILE"
-    source "${DIR}.dot/addhost.sh"
+    source "${DIR}.dot/add_host.sh"
     addHost "$category" "$ipaddress" "$portnumber" "$hostname"
     if [ $? -eq 1 ]; then
       message="$lng_add_success"
@@ -68,6 +73,22 @@ do
       message="$lng_remove_success"
     fi
   fi
+
+  # MANUAL BLOCK
+  #--------------------------------------------
+  if [ "$manual_block" -eq 1 ]; then
+    hostname_to_block=$(giveprompt "${lng_prompt_block_host}" "")
+    backup_host_file "$BACK_FILE"
+    source "$DIR".dot/block_host.sh
+
+    block_host "$BLOCK_CATEGORY" "$BLOCK_IP" "$hostname_to_block"
+    if [ $? -eq 1 ]; then
+      error_message "$lng_block_nohost"
+    else
+      message="$lng_block_success"
+    fi
+  fi
+
   echo -e "$message"
   sleep 1
 done

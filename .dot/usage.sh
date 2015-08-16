@@ -2,12 +2,12 @@
 
 function usage
 {
-	usagetxt main
+  usagetxt main
 }
 
-function	usage_add
+function  usage_add
 {
-	usagetxt add
+  usagetxt add
 }
      #echo "remove | rm   Invoke the remove-host command"
       #echo "-f --file     The configuration file, in $BASEPATH/sites"
@@ -17,12 +17,12 @@ function	usage_add
 
 function usage_backup
 {
-	usagetxt backup
+  usagetxt backup
 }
 
 function usage_block
-{	
-	usagetxt block
+{
+  usagetxt block
 }
 
 function usage_remove
@@ -32,5 +32,5 @@ function usage_remove
 
 function usagetxt
 {
-	cat ${DIR}".dot/usage/${1}.txt"
+  cat ${DIR}".dot/usage/${1}.txt"
 }

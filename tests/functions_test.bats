@@ -3,12 +3,6 @@ setup(){
 	source .dot/.functions
 }
 
-@test "A test I don't want to execute for now" {
-  skip "This command will return zero soon, but not now"
-  run foo
-  [ "$status" -eq 0 ]
-}
-
 @test "Load the language" {
 	skip "Skipping, currently only defining tests"
 }
@@ -37,9 +31,14 @@ setup(){
 	skip "Skipping, currently only defining tests"
 }
 
-
 @test "Gives back a format for prompt" {
 	skip "Skipping, currently only defining tests"
 }
 
+@test "Return an error message" {
+  run error_message "This is dog"
+  [ "$output" = "This is dog" ]
 
+  run error_message
+  [ "$output" = '' ]
+}
