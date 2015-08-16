@@ -1,3 +1,2 @@
-usage: cohoast block [ ipaddress ]
-Searches the hostname connecting to the ipaddress and blocking and blocking it
-
+usage: cohoast block [ ipaddress | hostname ]
+Blocks/Redirects a given hostname by ip or the hostname itself to a configured ip-addresss

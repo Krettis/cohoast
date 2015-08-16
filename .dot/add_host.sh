@@ -16,7 +16,7 @@ function addHost
   local line_append=7
   local insert_at_line_nr=0
 
-	local line_found_category
+  local line_found_category
 
   current_date=$(date "+%Y-%m-%d")
   file_format=${DIR}".dot/art/category.txt"
