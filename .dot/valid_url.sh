@@ -11,3 +11,4 @@ function valid_url()
     return 1
   fi
 }
+#EOF

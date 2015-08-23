@@ -1,4 +1,5 @@
 #!/bin/bash
+
 REMOTE=${REMOTE:-https://github.com/krettis/cohoast.git}
 TMPDIR=${TMPDIR:-/tmp}
 DEST=${DEST:-${TMPDIR}/cohoast-master}
@@ -133,3 +134,4 @@ call_in_profile
 install_man_page
 finalize
 
+#EOF

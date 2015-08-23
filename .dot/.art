@@ -1,5 +1,5 @@
 #!/bin/bash
 
-
 banner_menu="$(cat $DIR.dot/art/banner_menu.txt)"
 
+#EOF

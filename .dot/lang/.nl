@@ -28,3 +28,5 @@ lng_block_success="Hostname is geblokkeerd!"
 lng_block_nohost="De hostname kon niet gevonden worden"
 lng_remove_nohost="De hostname is niet aanwezig"
 lng_backup_success="Een backup is aangemaakt!"
+
+#EOF

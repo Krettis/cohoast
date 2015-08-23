@@ -57,3 +57,4 @@ function addHost
 	echo -e "text category: $category_name \nline: ${line_format}"
 }
 
+#EOF

@@ -34,3 +34,5 @@ function usagetxt
 {
   cat ${DIR}".dot/usage/${1}.txt"
 }
+
+#EOF

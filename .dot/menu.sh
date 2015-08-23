@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # MENU
 keep_menu=1
 
@@ -92,3 +93,5 @@ do
   echo -e "$message"
   sleep 1
 done
+
+#EOF

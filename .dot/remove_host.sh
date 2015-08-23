@@ -19,3 +19,5 @@ function found_host
   find_host_name=$(sed -n 's/\([0-9]\+\.[0-9]\+:[0-9]\+\t'"$word"'\)\s\{0,\}$/\1/p' "$FILE_HOST")
   echo "$find_host_name"
 }
+
+#EOF
