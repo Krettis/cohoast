@@ -5,8 +5,8 @@ RELEASE_NAME="Sand"
 ### CONFIGURATION ###
 #--------------------------------------------
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/"
-FILE_HOST="$DIR""hosts.txt"
-BACK_DIR="$DIR""backup/"
+FILE_HOST="${DIR}hosts.txt"
+BACK_DIR="${DIR}backup/"
 LOCALHOST="127.0.0.1"
 SUPPORTED_LANGUAGES=( "en" "nl" )
 LOG=0
@@ -16,9 +16,9 @@ declare lng_remove_nohost
 
 ### LOAD FILES 
 #--------------------------------------------
-source "$DIR".dot/.config
-source "$DIR".dot/.functions
-source "$DIR".dot/.art
+source "${DIR}.dot/.config"
+source "${DIR}.dot/.functions"
+source "${DIR}.dot/.art"
 load_user_config
 load_language
 load_file_locations
