@@ -31,14 +31,14 @@ function addHost
   fi
 
 	# delete if the same line format is found
-	sed '/'"$line_format"'/ d' "$FILE_HOST" > hosts.tmp
+  sed '/'"$line_format"'/ d' "$FILE_HOST" > "$TEMP_FILE"
 
-  line_found_category=$(sed -n '/'"#  $category_name"'/ =' hosts.tmp)
+  line_found_category=$(sed -n '/'"#  $category_name"'/ =' "$TEMP_FILE")
 
 	# A new category is added, with a different offset 
 	if [[ $line_found_category == '' ]] ; then
 	  line_append=$(($(wc -l < "$FILE_HOST")+11))
-		echo -e "$category_format" >> hosts.tmp
+    echo -e "$category_format" >> "$TEMP_FILE"
 	fi
 
 	# adding the the new line of 

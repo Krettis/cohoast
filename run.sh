@@ -5,6 +5,7 @@ RELEASE_NAME="Sand"
 ### CONFIGURATION ###
 #--------------------------------------------
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/"
+TEMP_FILE="${DIR}hosts.tmp"
 FILE_HOST="${DIR}hosts.txt"
 BACK_DIR="${DIR}backup/"
 LOCALHOST="127.0.0.1"
@@ -189,5 +190,5 @@ fi
 #--------------------------------------------
 unset FILE_HOST DEFAULT_PORT LOCALHOST FILE_LOCATION_HOST FILE_LOCATION_BACKUP banner_menu
 unset VERSION RELEASE_NAME
-rm -f hosts.tmp
+rm -f "$TEMP_FILE"
 #EOF
