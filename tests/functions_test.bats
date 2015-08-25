@@ -1,38 +1,41 @@
 #!/usr/bin/env bats
 setup(){
-	source .dot/.functions
+  source .dot/.functions
 }
 
 @test "Load the language" {
-	skip "Skipping, currently only defining tests"
+  DEFAULT_LANG='en'
+  run load_language
+  [ "$status" -eq 0 ]
+  DEFAULT_LANG='nl'
+  run load_language
+  [ "$status" -eq 0 ]
+  DEFAULT_LANG='nolanguage'
+  run load_language
+  [ "$status" -eq 1 ]
 }
 
 @test "Load the user configuration" {
-	skip "Skipping, currently only defining tests"
+  run load_user_config
+  echo $output
+  [ "$status" -eq 0 ]
+  [[ ! "$output" =~ "No such file or directory".* ]]
 }
 
 @test "Check on existance of function-name" {
-	run chfn_exists "in_array"
-	[ "$status" -eq 0 ]
+  run chfn_exists "in_array"
+  [ "$status" -eq 0 ]
 
-	run chfn_exists "a non existant function"
-	[ "$status" -eq 1 ]
+  run chfn_exists "a non existant function"
+  [ "$status" -eq 1 ]
 }
 
 @test "Check if a value in a array exists" {
-	skip "Skipping, currently only defining tests"
-}
-
-@test "Parsing the yaml file" {
-	skip "Skipping, currently only defining tests"
-}
-
-@test "All usages can being loaded" {
-	skip "Skipping, currently only defining tests"
-}
-
-@test "Gives back a format for prompt" {
-	skip "Skipping, currently only defining tests"
+  local standard=(one two three this four six seven)
+  run in_array "${standard[@]}" "this"
+  [ "$status" -eq 0 ]
+  run in_array "${standard[@]}" "not found"
+  [ "$status" -eq 1 ]
 }
 
 @test "Return an error message" {
