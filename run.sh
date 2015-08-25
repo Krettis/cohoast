@@ -1,6 +1,6 @@
 #!/bin/bash
-VERSION=0.6.0
-RELEASE_NAME="Sand"
+VERSION=1.0.0
+RELEASE_NAME="Track Ballast"
 
 ### CONFIGURATION ###
 #--------------------------------------------
