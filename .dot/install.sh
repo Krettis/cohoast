@@ -129,7 +129,7 @@ if [ -z "$1" ]; then
 else
  DEST="$1"
 fi
-if [ $? ]; then
+if [ $? -eq 0 ]; then
   call_in_profile
   #install_man_page
   finalize
