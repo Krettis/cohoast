@@ -40,7 +40,7 @@ features () {
 ## main clone_cohoast
 clone_cohoast()
 {
-  local passed=1
+  local passed=0
   message "Welcome to the 'cohoast' installer!"
   ## test for require features
   features git || return $?
@@ -57,7 +57,7 @@ clone_cohoast()
 
   if [ ! "$?" -eq 0 ];then
     an_error_occurred "Cloning the github repo failed"
-    passed=0
+    passed=1
   fi
   return $passed
 }
