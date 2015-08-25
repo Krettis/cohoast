@@ -1,14 +1,15 @@
-hello(1) -- greets bleh the world, or another arbitrary target 
+cohoast(1) -- Riding along with the train of service
 ====
 
 ## SYNOPSIS
-  `hello` [<target>]
+  `cohoast` add [<hostname>]
 
 ## DESCRIPTION
-  hello(1) is a program that greets either  
+  cohoast(1) is a program that will help you to administrate the hostnames in your hostfile.
+  It can:
 
-- the entire world, if <target> is not supplied, or  
-- an arbitrary person, group, or other target.
+- Add a hostname
+- Block a hostname
 
 ## EXAMPLES
 
@@ -27,8 +28,4 @@ Returns 0 on successful greeting.
 
 
 ## AUTHOR  
-Matt Behrens <matt.behrens@atomicobject.com>  
-
-## SEE ALSO  
-goodbye(1)
- No newline at end of file
+Krettis <krettis@gmail.com>  

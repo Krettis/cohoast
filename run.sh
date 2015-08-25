@@ -89,7 +89,7 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
       return
     fi
 
-    source "$DIR".dot/remove_host.sh
+    source "${DIR}.dot/remove_host.sh"
 
     find_host_name=$(found_host "$2") 
     if [ -z "$(found_host "$2")" ]; then

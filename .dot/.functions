@@ -22,32 +22,33 @@ function parse_yaml {
    }'
 }
 
-function load_language {
+function load_language
+{
   locale_found=$(locale | grep LANG | cut -d= -f2 | cut -d_ -f1 | cut -d\" -f2)
   if [ $(in_array "${SUPPORTED_LANGUAGES[@]}" $locale_found) == "y" ]; then
     lang=$locale_found 
   else
     lang=$DEFAULT_LANG
   fi
-  source $DIR".dot/lang/."$lang
+  source "${DIR}.dot/lang/.${lang}"
 }
 
-function load_user_config {
-  eval $(parse_yaml ${DIR}config.yml)
+function load_user_config
+{
+  eval $(parse_yaml "${DIR}config.yml")
 }
 
-
-function load_file_locations {
+# flatten config yaml vars
+function load_file_locations
+{
   if [ -z "$FILE_LOCATION_HOST" ]; then
-  # check which machine using
     return;
-  else 
+  else
     FILE_HOST="$FILE_LOCATION_HOST"
   fi
 }
 
-
-function backup_host_file 
+function backup_host_file()
 {
   local current_date
   local current_time
@@ -74,16 +75,16 @@ function backup_host_file
     fi
   fi
 
-# make a format for the backup to fil in
+  # make a format for the backup to fil in
   echo $annotation_time > $backup_file
   echo $comment >> $backup_file
   cat $FILE_HOST >> $backup_file
   cat $backup_file >> $backup_file_date
 }
 
-function show_usage 
+function show_usage()
 {
-  source $DIR".dot/usage.sh"
+  source "${DIR}.dot/usage.sh"
   fname="usage"
   if [ ! -z $1 ]; then
     fname+="_"$1
@@ -92,10 +93,7 @@ function show_usage
   $fname
 }
 
-
-
-
-function giveprompt 
+function giveprompt()
 {
   local givehint=""
   if [[ -n "$2" ]]; then
@@ -111,8 +109,6 @@ function giveprompt
   echo $answer;
 }
 
-
-
 function in_array 
 {
   local n=$#
@@ -126,7 +122,6 @@ function in_array
   echo "n"
   return 1
 }
-
 
 function chfn_exists
 {
@@ -145,11 +140,12 @@ function update_hosts_file()
   sudo cp "$TEMP_FILE" "$FILE_HOST"
 }
 
-function error_message
+function error_message()
 {
   if [ -z "$1" ]; then
     return
   fi
   >&2 echo "$1"
 }
+
 #EOF
