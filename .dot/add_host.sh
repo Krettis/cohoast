@@ -18,7 +18,7 @@ function addHost
   # Check if incoming is defined
   if [ ! $# -eq 4 ] || [ "$category" == "" ] || [ "$ipaddress" == "" ] || [ "$portnumber" == "" ] || [ "$hostname" == "" ]; then
     error_message "$lng_add_fail"
-    return
+    return 1
   fi
 
   characters_left=$((character_column-${#ipaddress}))
@@ -38,6 +38,7 @@ function addHost
 
   echo -e "$updated_hosts" > "$TEMP_FILE"
   update_hosts_file
+  return 0
 }
 
 function set_category()
