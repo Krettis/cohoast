@@ -1,7 +1,7 @@
 Cohoast 
 ===
 
-Manage your hostfile in the terminal - ___v0.4.0___ _'Sand'_ [♫](https://play.spotify.com/track/0pu6LHgjcYVQZPnPgxFbzi) 
+Manage your hostfile in the terminal - ___v1.0.0___ _'Track Ballast'_ [♫](https://play.spotify.com/track/0pu6LHgjcYVQZPnPgxFbzi) 
 
 ![Logo above the lonely railroad](http://i.imgur.com/S0UDcX1.jpg "Influence your hostfile in the terminal")
 
