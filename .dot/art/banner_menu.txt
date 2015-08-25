@@ -6,4 +6,4 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|--------------
 "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-' \   \   \   \ 
 ===== Ridin' along with the train of service ===========================
 
-%YEAR% by %CREATOR%, Version %VERSION%
+Copyright (c) %YEAR% MIT-License %CREATOR%, Version %VERSION%

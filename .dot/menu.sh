@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # MENU
 keep_menu=1
 
@@ -53,7 +54,7 @@ do
     backup_host_file "$BACK_FILE"
     source "${DIR}.dot/add_host.sh"
     addHost "$category" "$ipaddress" "$portnumber" "$hostname"
-    if [ $? -eq 1 ]; then
+    if [ $? -eq 0 ]; then
       message="$lng_add_success"
     fi
   fi
@@ -92,3 +93,5 @@ do
   echo -e "$message"
   sleep 1
 done
+
+#EOF

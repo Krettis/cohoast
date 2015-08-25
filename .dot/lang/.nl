@@ -5,7 +5,7 @@ menu_title="Selecteer een optie voor COHOAST"
 menu_option_add_host="Voeg hostname toe"
 menu_option_remove_host="Verwijder een hostname"
 menu_option_block_host="Blokkeer hostname"
-menu_option_quit="Ophouden"
+menu_option_quit="Stoppen"
 menu_option_backup="Doe een backup"
 
 # PROMPT ADD HOST
@@ -28,3 +28,5 @@ lng_block_success="Hostname is geblokkeerd!"
 lng_block_nohost="De hostname kon niet gevonden worden"
 lng_remove_nohost="De hostname is niet aanwezig"
 lng_backup_success="Een backup is aangemaakt!"
+
+#EOF

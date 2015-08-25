@@ -1,10 +1,10 @@
 FILE_LOCATION:
-  HOST: host.txt
+  HOST: /etc/hosts
 DEFAULT:
-  IP: 127.0.0.1 
+  IP: 127.0.0.1
   PORT: 80
   CATEGORY: default
 BLOCK:
-	IP: 127.0.0.1 
+  IP: 127.0.0.1
   CATEGORY: blacklist
-LANG: en 
+LANG: en #English

@@ -1,12 +1,13 @@
 #!/bin/bash
-VERSION=0.5.1
+VERSION=0.6.0
 RELEASE_NAME="Sand"
 
 ### CONFIGURATION ###
 #--------------------------------------------
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/"
-FILE_HOST="$DIR""hosts.txt"
-BACK_DIR="$DIR""backup/"
+TEMP_FILE="${DIR}hosts.tmp"
+FILE_HOST="${DIR}hosts.txt"
+BACK_DIR="${DIR}backup/"
 LOCALHOST="127.0.0.1"
 SUPPORTED_LANGUAGES=( "en" "nl" )
 LOG=0
@@ -16,9 +17,9 @@ declare lng_remove_nohost
 
 ### LOAD FILES 
 #--------------------------------------------
-source "$DIR".dot/.config
-source "$DIR".dot/.functions
-source "$DIR".dot/.art
+source "${DIR}.dot/.config"
+source "${DIR}.dot/.functions"
+source "${DIR}.dot/.art"
 load_user_config
 load_language
 load_file_locations
@@ -88,7 +89,7 @@ elif [ $(in_array "${ch_options[@]}" $1) == "y" ]; then
       return
     fi
 
-    source "$DIR".dot/remove_host.sh
+    source "${DIR}.dot/remove_host.sh"
 
     find_host_name=$(found_host "$2") 
     if [ -z "$(found_host "$2")" ]; then
@@ -189,4 +190,5 @@ fi
 #--------------------------------------------
 unset FILE_HOST DEFAULT_PORT LOCALHOST FILE_LOCATION_HOST FILE_LOCATION_BACKUP banner_menu
 unset VERSION RELEASE_NAME
-rm -f hosts.tmp
+rm -f "$TEMP_FILE"
+#EOF

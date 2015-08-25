@@ -42,6 +42,7 @@ function block_host()
 
   source "$DIR".dot/add_host.sh
   addHost "$category" "$blockip" "80" "$hostname"
-  return 0
+  return $?
 }
 
+#EOF
