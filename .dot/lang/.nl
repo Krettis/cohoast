@@ -5,7 +5,7 @@ menu_title="Selecteer een optie voor COHOAST"
 menu_option_add_host="Voeg hostname toe"
 menu_option_remove_host="Verwijder een hostname"
 menu_option_block_host="Blokkeer hostname"
-menu_option_quit="Ophouden"
+menu_option_quit="Stoppen"
 menu_option_backup="Doe een backup"
 
 # PROMPT ADD HOST
