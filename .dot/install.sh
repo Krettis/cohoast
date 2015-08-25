@@ -5,7 +5,6 @@ TMPDIR=${TMPDIR:-/tmp}
 DEST=${DEST:-${TMPDIR}/cohoast-master}
 CURRENT_FOLDER="$(pwd)"
 
-
 warn (){
   echo -e "\033[1;36mWarning: \033[1;37m$1\033[0;39m" > /dev/tty
 }
@@ -96,9 +95,9 @@ call_in_profile () {
   folder_cohoast=$(pwd)
   profile_file=''
   if [ "$(uname)" == "Darwin" ]; then
-    profile_file='.bash_profile'
+    profile_file="${HOME}/.bash_profile"
   elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    profile_file='.bashrc'
+    profile_file="${HOME}/.bashrc"
   elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     # Do something under Windows NT platform
     message "Sorry windows is not supported for installation.\n Feel free to add this to your profile"
@@ -106,8 +105,7 @@ call_in_profile () {
   fi
 
   function_to_insert="\n# Edit your hostfile within the terminal\nfunction cohoast() { . ${folder_cohoast}/run.sh \$@ ;}"
-  $(echo -e $function_to_insert >> ~/$profile_file) && source ~/$profile_file && source "${folder_cohoast}/.dot/.functions"
-
+  $(echo -e "$function_to_insert" >> "$profile_file") && source $profile_file > /dev/null &&  source "${folder_cohoast}/.dot/.functions"
 
   if ! chfn_exists cohoast; then
     warn "Something went wrong :(\n
@@ -121,7 +119,8 @@ call_in_profile () {
 finalize(){
   cd "$CURRENT_FOLDER"
   if [ $? -eq 0 ]; then
-    message "Installation completed!\nType '\033[0;36mcohoast\033[1;37m' to execute or '\033[0;36mman cohoast\033[1;37m' for the manual"
+    message "Installation completed!\nType '\033[0;36mcohoast\033[1;37m' to execute" 
+    # or '\033[0;36mman cohoast\033[1;37m' for the manual"
   fi
 }
 
@@ -130,8 +129,10 @@ if [ -z "$1" ]; then
 else
  DEST="$1"
 fi
-call_in_profile
-install_man_page
-finalize
+if [ $? ]; then
+  call_in_profile
+  #install_man_page
+  finalize
+fi
 
 #EOF
