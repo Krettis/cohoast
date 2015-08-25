@@ -140,6 +140,10 @@ function chfn_exists
   fi
 }
 
+function update_hosts_file()
+{
+  sudo cp "$TEMP_FILE" "$FILE_HOST"
+}
 
 function error_message
 {

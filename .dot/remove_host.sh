@@ -8,7 +8,7 @@ function remove_host
   if [ ! -z "$line_format" ]; then
     sed '/'"$line_format"'/ d' $FILE_HOST > "$TEMP_FILE"
     if [ "$(diff "$FILE_HOST" "$TEMP_FILE")" ]; then
-      cat "$TEMP_FILE" > "$FILE_HOST"
+      update_hosts_file
     fi
   fi
 }
