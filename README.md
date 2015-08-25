@@ -27,7 +27,7 @@ That is a separate concern. The `hosts`-file and `virtual host configuration`-fi
 
 Use this command:
 
-	curl https://raw.githubusercontent.com/Krettis/cohoast/master/.dot/install.sh | sh
+	curl https://raw.githubusercontent.com/Krettis/cohoast/master/.dot/install.sh | bash
 
 #### Or manual
  Download the release or clone this repo.  the folder in the desired location. Then simple run:
